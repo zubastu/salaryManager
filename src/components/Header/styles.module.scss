@@ -1,0 +1,32 @@
+@import '../../assets/styles/mixins';
+@import '../../assets/styles/variables';
+
+.header {
+  @include typography-xl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $color-palette-border;
+  padding: 20px 40px;
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  gap: 100px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.link {
+  color: $color-palette-white;
+}
+
+.linkActive {
+  color: $color-palette-blue;
+}
+
+.authContainer {
+  width: 100px;
+}

@@ -1,0 +1,26 @@
+@use '../../assets/styles/variables';
+@use '../../assets/styles/mixins';
+
+.input {
+  @include mixins.typography-l;
+  background-color: variables.$color-palette-input-color-auth;
+  color: variables.$color-palette-white;
+  width: 100%;
+  height: 40px;
+  padding: 12px 12px 12px 15px;
+}
+.errorMessage {
+  @include mixins.typography-l;
+  color: variables.$color-palette-error;
+  max-width: 260px;
+}
+
+.input::-webkit-calendar-picker-indicator {
+  filter: invert(56%) sepia(65%) saturate(6010%) hue-rotate(214deg) brightness(105%) contrast(97%);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

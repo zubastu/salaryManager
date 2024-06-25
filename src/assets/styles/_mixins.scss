@@ -1,0 +1,55 @@
+@use 'variables';
+
+@mixin typography-xxs {
+  font-size: 16px;
+  line-height: 18px;
+}
+
+@mixin typography-xs {
+  font-size: 16px;
+  line-height: 18.75px;
+}
+
+@mixin typography-s {
+  font-size: 12px;
+  line-height: 24px;
+}
+
+@mixin typography-mm {
+  font-size: 18px;
+  line-height: 26px;
+}
+
+@mixin with-border-bottom {
+  border-bottom: 1px solid variables.$color-palette-border;
+}
+
+@mixin transition-opacity {
+  transition: opacity .5s ease;
+}
+
+
+@mixin typography-m {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+@mixin typography-l {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.41px;
+}
+
+@mixin typography-x {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+}
+
+@mixin typography-xl {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 23.44px;
+}
+
+
