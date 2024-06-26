@@ -1,9 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { routes } from "../../utils/routes.ts";
 import Button from "../Button/Button.tsx";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(routes.login);
+  };
+
   return (
     <header className={styles.header}>
       <ul className={styles.list}>
@@ -41,7 +46,7 @@ const Header = () => {
         </li>
       </ul>
       <div className={styles.authContainer}>
-        <Button type="button" label="Войти" />
+        <Button type="button" label="Войти" onClick={handleClick} />
       </div>
     </header>
   );

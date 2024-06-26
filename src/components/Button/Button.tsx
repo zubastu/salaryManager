@@ -7,13 +7,14 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   id?: string;
   disabled?: boolean;
   onClick?: () => void;
+  extraStyles?: string;
 }
 
 const Button: FC<ButtonProps> = (props) => {
-  const { label, disabled, type = "submit", ...rest } = props;
+  const { label, disabled, type = "submit", extraStyles, ...rest } = props;
   return (
     <button
-      className={styles.submitButton}
+      className={`${styles.submitButton} ${extraStyles}`}
       type={type}
       disabled={disabled ? disabled : false}
       {...rest}

@@ -1,0 +1,23 @@
+@import '../../assets/styles/mixins';
+@import '../../assets/styles/variables';
+
+.employeeItem {
+  width: 100%;
+  border: 1px solid $color-palette-white;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all ease .5s;
+}
+
+.employeeItemSelected {
+  width: 100%;
+  border: 1px solid $color-palette-green;
+  color: $color-palette-green;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all ease .5s;
+}

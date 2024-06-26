@@ -1,0 +1,17 @@
+@use '../../assets/styles/variables';
+@use '../../assets/styles/mixins';
+
+
+.container {
+}
+
+.link {
+  color: variables.$color-palette-blue;
+  opacity: 1;
+  transition: opacity ease .5s;
+
+  &:hover {
+    opacity: .5;
+    transition: opacity ease .5s;
+  }
+}

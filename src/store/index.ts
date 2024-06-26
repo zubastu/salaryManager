@@ -1,17 +1,26 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { tasksApi } from "./tasks/tasks.api.ts";
+import { employeesApi } from "./employees/employees.api.ts";
 import { authApi } from "./auth/auth.api.ts";
-import { sectionFocusSlice } from "./sectionFocusSlice/sectionFocusSlice.ts";
+import { employeeSelectionSlice } from "./employeeSelectionSlice/employeeSelectionSlice.ts";
+import { workShiftsApi } from "./workShifts/workShifts.api.ts";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
 export const store = configureStore({
   reducer: {
-    sectionFocusSlice: sectionFocusSlice.reducer,
-    [tasksApi.reducerPath]: tasksApi.reducer,
+    selectedEmployee: employeeSelectionSlice.reducer,
+    [employeesApi.reducerPath]: employeesApi.reducer,
+    [workShiftsApi.reducerPath]: workShiftsApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(tasksApi.middleware, authApi.middleware),
+    getDefaultMiddleware().concat(
+      employeesApi.middleware,
+      authApi.middleware,
+      workShiftsApi.middleware,
+    ),
 });
+
+setupListeners(store.dispatch);
 
 export type RootState = ReturnType<typeof store.getState>;
 

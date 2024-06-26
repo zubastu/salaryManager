@@ -1,8 +1,9 @@
-import { TForm, TWorkShiftProperties } from "../types";
+import { TEmployeeListItem, TForm, TWorkShiftProperties } from "../types";
 
 export const getSalary = (
   data: TForm,
   isNightWork: boolean,
+  selectedEmployee: TEmployeeListItem,
 ): TWorkShiftProperties => {
   const { workHours, gain } = data;
   const pricePerHour = 200;
@@ -21,8 +22,7 @@ export const getSalary = (
     ...data,
     salary,
     isNightShift: isNightWork,
-    date: "test",
-    employee_id: "test",
-    employeeName: "test",
+    employeeName: selectedEmployee.name,
+    employee_id: selectedEmployee.id,
   };
 };

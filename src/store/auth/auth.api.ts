@@ -5,7 +5,7 @@ import {
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 
-import { getHeaders } from "../tasks/tasks.api.ts";
+import { getHeaders } from "../employees/employees.api.ts";
 import { TLogin } from "../../types";
 import { BASE_URL } from "../../utils/constants.ts";
 

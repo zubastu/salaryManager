@@ -1,0 +1,60 @@
+@use '../../assets/styles/variables';
+@use '../../assets/styles/mixins';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.forms {
+  display: flex;
+  height: 300px;
+  gap: 40px;
+}
+
+.employeeFormsContainer {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.createFormContainer {
+  gap: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.updateFormContainer {
+  gap: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deleteEmployee {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  min-height: 200px;
+}
+
+.selectedEmployeeName {
+  min-height: 30px;
+}
+
+.buttonActive {
+  border: 1px solid variables.$color-palette-green;
+  color: variables.$color-palette-green;
+}

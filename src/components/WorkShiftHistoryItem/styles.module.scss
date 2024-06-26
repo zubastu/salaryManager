@@ -1,0 +1,49 @@
+@use '../../assets/styles/variables';
+@use '../../assets/styles/mixins';
+
+.listItem {
+  color: variables.$color-palette-white;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid variables.$color-palette-white;
+  padding: 10px;
+  cursor: pointer;
+  transition: all ease .5s;
+  &:hover {
+    color: variables.$color-palette-green;
+    transition: all ease .5s;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  min-width: 110px;
+}
+
+.listItemPropName {
+  @include mixins.typography-x;
+}
+
+.listItemPropValue {
+  @include mixins.typography-xl;
+  color: variables.$color-palette-blue;
+}
+
+.removeButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1 1;
+}
+
+.remove {
+  width: 30px;
+  height: 30px;
+  color: variables.$color-palette-error;
+  border-radius: 50%;
+}
