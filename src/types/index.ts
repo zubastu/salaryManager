@@ -1,8 +1,8 @@
 export type TWorkShiftProperties = {
   employee_id: string;
   cash: number;
-  cash_in_case: number;
-  costs: number;
+  cash_in_case?: number;
+  costs?: number;
   gain: number;
   workHours: number;
   employeeName: string;
@@ -41,8 +41,8 @@ export type TWorkShift = {
   workHours: number;
   salary: number;
   cash: number;
-  costs: number;
-  cash_in_case: number;
+  costs?: number;
+  cash_in_case?: number;
   isNightShift: boolean;
   employee_id: string;
   createdAt: string;
