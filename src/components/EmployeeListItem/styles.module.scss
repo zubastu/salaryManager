@@ -21,3 +21,12 @@
   cursor: pointer;
   transition: all ease .5s;
 }
+
+@media screen and (max-width: 500px) {
+  .employeeItem {
+    padding: 8px;
+  }
+  .employeeItemSelected {
+    padding: 8px;
+  }
+}
