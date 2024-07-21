@@ -5,9 +5,8 @@
   color: variables.$color-palette-white;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   border-bottom: 1px solid variables.$color-palette-white;
-  padding: 10px;
   cursor: pointer;
   transition: all ease .5s;
   &:hover {
@@ -22,16 +21,21 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding: 5px;
-  min-width: 110px;
+  padding: 10px;
+  max-width: 110px;
+  min-width: 70px;
 }
 
 .listItemPropName {
   @include mixins.typography-x;
+  display: flex;
+  text-align: center;
+  align-items: flex-start;
+  min-height: 25px;
 }
 
 .listItemPropValue {
-  @include mixins.typography-xl;
+  @include mixins.typography-x;
   color: variables.$color-palette-blue;
 }
 
@@ -46,4 +50,35 @@
   height: 30px;
   color: variables.$color-palette-error;
   border-radius: 50%;
+}
+
+@media screen and (max-width: 830px) {
+  .listItem {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .listItemPropValue {
+    @include mixins.typography-xs;
+  }
+
+  .listItemPropName {
+    @include mixins.typography-xs;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .listItem {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    margin: 0 0 10px 0;
+  }
+
+  .wrapper {
+    padding: 0;
+  }
 }

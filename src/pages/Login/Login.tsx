@@ -6,19 +6,32 @@ import { SubmitHandler } from "react-hook-form";
 import { TLogin } from "../../types";
 import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../utils/routes.ts";
-import { useLoginMutation } from "../../store/auth/auth.api.ts";
+import {
+  useGetUserDataQuery,
+  useLoginMutation,
+} from "../../store/auth/auth.api.ts";
 import { useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [login, { isError, isSuccess, data }] = useLoginMutation();
+  const [
+    login,
+    { isError: loginError, isSuccess: loginSuccess, data: loginData },
+  ] = useLoginMutation();
+  const { data: _, refetch } = useGetUserDataQuery();
 
   useEffect(() => {
-    if (data && data.accessToken) {
-      localStorage.setItem("token", data.accessToken);
+    if (loginData && loginData.accessToken) {
+      localStorage.setItem("token", loginData.accessToken);
+    }
+  }, [loginError, loginSuccess, loginData]);
+
+  useEffect(() => {
+    if (loginData && loginData.accessToken) {
+      refetch();
       navigate(routes.workShifts);
     }
-  }, [isError, isSuccess, data]);
+  }, [loginSuccess]);
 
   const handleSubmit: SubmitHandler<TLogin> = (data) => {
     login(data);

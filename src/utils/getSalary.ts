@@ -1,4 +1,5 @@
 import { TEmployeeListItem, TForm, TWorkShiftProperties } from "../types";
+import { nightHours, dayHours } from "./constants.ts";
 
 export const getSalary = (
   data: TForm,
@@ -20,9 +21,9 @@ export const getSalary = (
 
   return {
     ...data,
+    date: isNightWork ? data.date + nightHours : data.date + dayHours,
     salary,
     isNightShift: isNightWork,
-    employeeName: selectedEmployee.name,
-    employee_id: selectedEmployee.id,
+    user_id: selectedEmployee.id,
   };
 };

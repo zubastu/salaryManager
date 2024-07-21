@@ -50,7 +50,7 @@ const EmployeeSettings = () => {
       dispatch(resetEmployee());
     }
     dispatch(resetEmployee());
-  }, [isSuccessDelete]);
+  }, [isSuccessDelete, tab]);
 
   return (
     <section className={styles.container}>
@@ -79,7 +79,9 @@ const EmployeeSettings = () => {
             <h3 className={styles.heading}>Добавить сотрудника</h3>
 
             <FormGroup onSubmit={handleSubmitCreate} isReset={isSuccessCreate}>
+              <Input name="username" placeholder="Логин сотрудника" />
               <Input name="name" placeholder="Имя сотрудника" />
+              <Input name="password" placeholder="Пароль сотрудника" />
               <Button label="Добавить" />
             </FormGroup>
           </div>

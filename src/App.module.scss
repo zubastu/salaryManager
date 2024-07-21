@@ -106,3 +106,10 @@
   -webkit-transform: translateY(-4rem);
   transform: translateY(-4rem);
 }
+
+@media screen and (max-width: 400px) {
+  .main {
+    overflow-y: auto;
+  }
+}
+

@@ -2,12 +2,12 @@
 @import '../../assets/styles/variables';
 
 .header {
-  @include typography-xl;
+  @include typography-xs;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: $color-palette-border;
-  padding: 20px 40px;
+  padding: 10px 20px;
   width: 100%;
 }
 
@@ -23,10 +23,41 @@
   color: $color-palette-white;
 }
 
+.greetings {
+  @include typography-l;
+
+}
+
 .linkActive {
   color: $color-palette-blue;
 }
 
 .authContainer {
-  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+}
+
+.exitButton {
+  color: $color-palette-error;
+  @include typography-l;
+  width: 90px;
+  padding: 5px;
+}
+
+
+@media screen and (max-width: 760px) {
+  .header {
+    padding: 5px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .list {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .authContainer {
+    width: 80%;
+  }
 }

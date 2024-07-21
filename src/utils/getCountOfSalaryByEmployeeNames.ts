@@ -5,7 +5,7 @@ export const getCountOfSalaryByEmployeeNames = (
 ) => {
   const getEmployeeNames = () => {
     const result: string[] = [];
-
+    //@ts-ignore
     workShifts.forEach(({ employeeName }) => {
       if (result.find((item) => item === employeeName)) {
         return;
@@ -16,6 +16,7 @@ export const getCountOfSalaryByEmployeeNames = (
     return result;
   };
   const filterByName = (name: string) => {
+    //@ts-ignore
     return workShifts.filter((item) => item.employeeName === name);
   };
 

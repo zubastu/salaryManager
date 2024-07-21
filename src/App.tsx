@@ -6,19 +6,33 @@ import Header from "./components/Header/Header.tsx";
 import Login from "./pages/Login/Login.tsx";
 import EmployeeSettings from "./pages/EmployeeSettings/EmployeeSettings.tsx";
 import CountSalary from "./pages/CountSalary/CountSalary.tsx";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.tsx";
 
 function App() {
   const location = useLocation();
   const isLoginPage = location.pathname === routes.login;
+
   return (
     <>
       {!isLoginPage && <Header />}
       <main className={styles.main}>
         <Routes>
-          <Route element={<WorkShifts />} path={routes.workShifts} />
-          <Route element={<CountSalary />} path={routes.salary} />
           <Route
-            element={<EmployeeSettings />}
+            element={
+              <ProtectedRoute element={<WorkShifts />} adminOnly={false} />
+            }
+            path={routes.workShifts}
+          />
+          <Route
+            element={
+              <ProtectedRoute element={<CountSalary />} adminOnly={true} />
+            }
+            path={routes.salary}
+          />
+          <Route
+            element={
+              <ProtectedRoute element={<EmployeeSettings />} adminOnly={true} />
+            }
             path={routes.employeeSettings}
           />
           <Route element={<Login />} path={routes.login} />

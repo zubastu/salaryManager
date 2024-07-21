@@ -7,7 +7,10 @@ import FormGroup from "../../components/FormGroup/FormGroup.tsx";
 import Input from "../../components/Input/Input.tsx";
 import WorkShiftsHistory from "../../components/WorkShiftsHistory/WorkShiftsHistory.tsx";
 import Button from "../../components/Button/Button.tsx";
-import { useLazyGetEmployeeWorkShiftsQuery } from "../../store/workShifts/workShifts.api.ts";
+import {
+  useLazyGetEmployeeWorkShiftsBetweenDatesQuery,
+  workShiftsApi,
+} from "../../store/workShifts/workShifts.api.ts";
 import { SubmitHandler } from "react-hook-form";
 import { TWorkShift } from "../../types";
 
@@ -20,7 +23,7 @@ const CountSalary = () => {
   const [
     getShifts,
     { data: workShiftsResponse, isSuccess: workShiftsResponseSuccess },
-  ] = useLazyGetEmployeeWorkShiftsQuery();
+  ] = useLazyGetEmployeeWorkShiftsBetweenDatesQuery();
   const [workShifts, setWorkShifts] = useState<TWorkShift[]>([]);
   const [salary, setSalary] = useState(0);
   const [workHours, setWorkHours] = useState(0);
@@ -40,21 +43,22 @@ const CountSalary = () => {
 
   const handleSubmit: SubmitHandler<TDateForm> = async (data) => {
     if (selectedEmployee.id !== "") {
-      await getShifts(selectedEmployee.id);
-      setDates({ from: data.from, to: data.to });
+      dispatch(workShiftsApi.util?.invalidateTags(["WorkShiftsEmployee"]));
+      await getShifts({
+        user_id: selectedEmployee.id,
+        startDate: data.from + " 03:59:59:0000",
+        endDate: data.to + " 20:59:59:0000",
+      });
+      setDates({
+        from: data.from,
+        to: data.to,
+      });
     }
   };
 
   useEffect(() => {
-    if (dates.from !== "" && dates.to !== "" && workShiftsResponseSuccess) {
-      const filteredWorkShifts = workShiftsResponse.filter(
-        (workShift) =>
-          new Date(workShift.date) >= new Date(dates.from) &&
-          new Date(workShift.date) <= new Date(dates.to),
-      );
-      setWorkShifts(filteredWorkShifts);
-    }
-  }, [dates]);
+    workShiftsResponseSuccess && setWorkShifts(workShiftsResponse);
+  }, [workShiftsResponse, workShiftsResponseSuccess]);
 
   useEffect(() => {
     if (workShifts) {

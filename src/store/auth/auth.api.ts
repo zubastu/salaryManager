@@ -24,12 +24,15 @@ type TCustomError = {
 
 type TUserResponse = {
   username: string;
+  name: string;
   id: string;
   accessToken: string;
+  role_id: number;
 };
 
 export const authApi = createApi({
   reducerPath: "auth/api",
+  tagTypes: ["Auth"],
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
   }) as BaseQueryFn<string | FetchArgs, unknown, TCustomError, {}>,
@@ -45,8 +48,9 @@ export const authApi = createApi({
     getUserData: build.query<TUserResponse, void>({
       query: () => ({
         url: "/users/me",
-        headers: getHeaders(),
+        headers: getHeaders(true),
       }),
+      providesTags: () => ["Auth"],
     }),
   }),
 });

@@ -13,7 +13,7 @@ export const workShiftsApi = createApi({
     getAllWorkShifts: build.query<TWorkShift[], void>({
       query: () => ({
         url: "/work_shifts",
-        headers: getHeaders(),
+        headers: getHeaders(true),
       }),
       providesTags: () => ["WorkShiftsHistory"],
     }),
@@ -21,6 +21,16 @@ export const workShiftsApi = createApi({
     getEmployeeWorkShifts: build.query<TWorkShift[], string>({
       query: (employee_id) => ({
         url: `/work_shifts/${employee_id}`,
+        headers: getHeaders(true),
+      }),
+      providesTags: () => ["WorkShiftsEmployee"],
+    }),
+
+    getEmployeeWorkShiftsBetweenDates: build.query<TWorkShift[], any>({
+      query: (data) => ({
+        url: `/work_shifts/${data.user_id}/dates`,
+        body: { startDate: data.startDate, endDate: data.endDate },
+        method: "POST",
         headers: getHeaders(true),
       }),
       providesTags: () => ["WorkShiftsEmployee"],
@@ -53,4 +63,5 @@ export const {
   usePostWorkShiftMutation,
   useDeleteWorkShiftMutation,
   useLazyGetEmployeeWorkShiftsQuery,
+  useLazyGetEmployeeWorkShiftsBetweenDatesQuery,
 } = workShiftsApi;

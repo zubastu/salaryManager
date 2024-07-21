@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../../utils/constants.ts";
 import {
-  Employee,
+  User,
   TEmployee,
   TEmployeeForm,
   TEmployeeFormWithId,
@@ -34,14 +34,14 @@ export const employeesApi = createApi({
     getEmployees: build.query<TEmployee[], void>({
       query: () => ({
         url: "/employee",
-        headers: getHeaders(),
+        headers: getHeaders(true),
       }),
       providesTags: () => ["Employees"],
     }),
 
-    createEmployee: build.mutation<Employee, TEmployeeForm>({
+    createEmployee: build.mutation<User, TEmployeeForm>({
       query: (data) => ({
-        url: "/employee",
+        url: "/registration",
         headers: getHeaders(true),
         method: "POST",
         body: data,
