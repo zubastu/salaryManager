@@ -64,7 +64,10 @@ const WorkShifts = () => {
   return (
     <section className={styles.container}>
       <div className={styles.formWrapper}>
-        {user?.role_id === 1 && <EmployeesList />}
+        {user?.role_id === 1 && !isMobile && <EmployeesList />}
+        {user?.role_id === 1 && isMobile && tabValue === "workShifts" && (
+          <EmployeesList />
+        )}
 
         {isMobile && (
           <div className={styles.tabs}>
