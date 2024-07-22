@@ -54,7 +54,17 @@
   min-height: 30px;
 }
 
-.buttonActive {
-  border: 1px solid variables.$color-palette-green;
-  color: variables.$color-palette-green;
+@media screen and (max-width: 630px) {
+  .container {
+    align-items: center;
+  }
+  .tabs {
+    flex-direction: column;
+    max-width: 320px;
+    gap: 5px;
+  }
+  .forms {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

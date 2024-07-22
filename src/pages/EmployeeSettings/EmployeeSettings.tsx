@@ -13,6 +13,7 @@ import { SubmitHandler } from "react-hook-form";
 import { TEmployeeForm } from "../../types";
 import { useEffect, useState } from "react";
 import { resetEmployee } from "../../store/employeeSelectionSlice/employeeSelectionSlice.ts";
+import { Tab } from "../../components/Tab/Tab.tsx";
 
 enum Tabs {
   add = "ADD",
@@ -55,20 +56,20 @@ const EmployeeSettings = () => {
   return (
     <section className={styles.container}>
       <div className={styles.tabs}>
-        <Button
-          label="Добавить"
+        <Tab
+          value="Добавить"
           onClick={() => setTab(Tabs.add)}
-          extraStyles={tab === Tabs.add ? styles.buttonActive : ""}
+          active={tab === Tabs.add}
         />
-        <Button
-          label="Изменить"
+        <Tab
+          value="Изменить"
           onClick={() => setTab(Tabs.update)}
-          extraStyles={tab === Tabs.update ? styles.buttonActive : ""}
+          active={tab === Tabs.update}
         />
-        <Button
-          label="Удалить"
+        <Tab
+          value="Удалить"
           onClick={() => setTab(Tabs.remove)}
-          extraStyles={tab === Tabs.remove ? styles.buttonActive : ""}
+          active={tab === Tabs.remove}
         />
       </div>
 
