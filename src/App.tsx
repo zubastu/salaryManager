@@ -7,6 +7,7 @@ import Login from "./pages/Login/Login.tsx";
 import EmployeeSettings from "./pages/EmployeeSettings/EmployeeSettings.tsx";
 import CountSalary from "./pages/CountSalary/CountSalary.tsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.tsx";
+import NavigationPopup from "./components/NavigationModal/NavigationPopup.tsx";
 
 function App() {
   const location = useLocation();
@@ -41,6 +42,7 @@ function App() {
             path={"*"}
           />
         </Routes>
+        <NavigationPopup />
       </main>
     </>
   );

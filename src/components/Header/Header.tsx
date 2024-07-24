@@ -1,9 +1,11 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { routes } from "../../utils/routes.ts";
 import Button from "../Button/Button.tsx";
 import { authApi, useGetUserDataQuery } from "../../store/auth/auth.api.ts";
 import { useAppDispatch } from "../../hooks/store.ts";
+import NavigationLinks from "../NavigationLinks/NavigationLinks.tsx";
+import { openNavModal } from "../../store/navigationPopupSlice/navigationPopupSlice.ts";
 
 const Header = () => {
   const { data } = useGetUserDataQuery();
@@ -15,47 +17,14 @@ const Header = () => {
     dispatch(authApi.util.invalidateTags(["Auth"]));
   };
 
+  const handleOpenMobileModal = () => {
+    dispatch(openNavModal());
+  };
+
   return (
     <header className={styles.header}>
-      {data?.role_id === 1 ? (
-        <ul className={styles.list}>
-          <li>
-            <NavLink
-              to={routes.workShifts}
-              className={({ isActive }) =>
-                isActive ? styles.linkActive : styles.link
-              }
-            >
-              Добавление рабочей смены
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to={routes.salary}
-              className={({ isActive }) =>
-                isActive ? styles.linkActive : styles.link
-              }
-            >
-              Расчет зарплаты
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to={routes.employeeSettings}
-              className={({ isActive }) =>
-                isActive ? styles.linkActive : styles.link
-              }
-            >
-              Параметры сотрудника
-            </NavLink>
-          </li>
-        </ul>
-      ) : (
-        <div></div>
-      )}
-      <div className={styles.authContainer}>
+      {data?.role_id === 1 ? <NavigationLinks /> : <div></div>}
+      <div className={styles.desktopContainer}>
         <p className={styles.greetings}>Привет, {data?.name}</p>
         <Button
           type="button"
@@ -63,6 +32,13 @@ const Header = () => {
           extraStyles={styles.exitButton}
           onClick={handleLogoutClick}
         />
+      </div>
+      <div className={styles.mobileContainer}>
+        <p className={styles.greetings}>Привет, {data?.name}</p>
+        <Button
+          className={styles.headerModalButton}
+          onClick={handleOpenMobileModal}
+        ></Button>
       </div>
     </header>
   );

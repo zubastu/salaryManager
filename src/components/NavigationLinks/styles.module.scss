@@ -1,0 +1,24 @@
+@use '../../assets/styles/variables';
+@use '../../assets/styles/mixins';
+
+.list {
+  display: flex;
+  gap: 100px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.link {
+  color: variables.$color-palette-white;
+}
+
+.linkActive {
+  color: variables.$color-palette-blue;
+}
+
+@media screen and (max-width: 760px) {
+  .list {
+    display: none;
+  }
+}

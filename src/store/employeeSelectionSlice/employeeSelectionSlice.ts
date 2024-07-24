@@ -13,7 +13,7 @@ const initialState: TEmployeeSelectionSlice = {
 };
 
 export const employeeSelectionSlice = createSlice({
-  name: "sectionFocusSlice",
+  name: "employeeSelection",
   initialState,
   reducers: {
     setEmployee(state, action) {
