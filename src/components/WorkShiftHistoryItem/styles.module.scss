@@ -76,9 +76,24 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
   }
 
   .wrapper {
-    padding: 5px;
+    padding: 0;
+  }
+
+  .listItemPropName {
+    min-height: 40px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 332px) {
+  .listItemPropName {
+    min-height: 57px;
   }
 }
