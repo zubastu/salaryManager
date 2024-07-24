@@ -13,6 +13,8 @@ import {
 } from "../../store/workShifts/workShifts.api.ts";
 import { SubmitHandler } from "react-hook-form";
 import { TWorkShift } from "../../types";
+import useWindowDimensions from "../../hooks/resize.ts";
+import { Tab } from "../../components/Tab/Tab.tsx";
 
 type TDateForm = {
   from: string;
@@ -31,7 +33,9 @@ const CountSalary = () => {
     from: "",
     to: "",
   });
+  const [tabValue, setTabValue] = useState<"form" | "result">("form");
   const dispatch = useAppDispatch();
+  const { width } = useWindowDimensions();
 
   const { selectedEmployee } = useAppSelector(
     (store) => store.selectedEmployee,
@@ -46,19 +50,22 @@ const CountSalary = () => {
       dispatch(workShiftsApi.util?.invalidateTags(["WorkShiftsEmployee"]));
       await getShifts({
         user_id: selectedEmployee.id,
-        startDate: data.from + " 03:59:59:0000",
-        endDate: data.to + " 20:59:59:0000",
+        startDate: data.from + " 00:59:59:0000",
+        endDate: data.to + " 23:59:59:0000",
       });
       setDates({
         from: data.from,
         to: data.to,
       });
+      isMobile && setTabValue("result");
     }
   };
 
   useEffect(() => {
     workShiftsResponseSuccess && setWorkShifts(workShiftsResponse);
   }, [workShiftsResponse, workShiftsResponseSuccess]);
+
+  const isMobile = width <= 1120;
 
   useEffect(() => {
     if (workShifts) {
@@ -76,27 +83,79 @@ const CountSalary = () => {
 
   return (
     <section className={styles.container}>
-      <div className={styles.formContainer}>
-        <EmployeesList />
-        <FormGroup onSubmit={handleSubmit}>
-          <Input name="from" placeholder="С даты" type="date" />
-          <Input name="to" placeholder="По дату" type="date" />
-          <Button label="Расчитать" />
-        </FormGroup>
-      </div>
-      <div className={styles.resultContainer}>
-        <div className={styles.salaryContainer}>
-          <h3 className={styles.heading}>Сотрудник: {selectedEmployee.name}</h3>
-          <p>
-            Период: с {dates.from} по {dates.to}
-          </p>
-          <p>Часов отработал: {workHours}</p>
-          <p>Заработал: {salary} р</p>
+      {isMobile && (
+        <div className={styles.tabs}>
+          <Tab
+            onClick={() => {
+              setTabValue("form");
+            }}
+            value="Выбрать даты"
+            active={tabValue === "form"}
+          />
+          <Tab
+            onClick={() => {
+              setTabValue("result");
+            }}
+            value="Посмотреть реузльтат"
+            active={tabValue === "result"}
+          />
         </div>
-        {workShifts && (
-          <WorkShiftsHistory data={workShifts} title="Смены в расчете" />
-        )}
-      </div>
+      )}
+      {!isMobile && (
+        <div className={styles.formContainer}>
+          <EmployeesList />
+          <FormGroup onSubmit={handleSubmit}>
+            <Input name="from" placeholder="С даты" type="date" />
+            <Input name="to" placeholder="По дату" type="date" />
+            <Button label="Расчитать" />
+          </FormGroup>
+        </div>
+      )}
+      {!isMobile && (
+        <div className={styles.resultContainer}>
+          <div className={styles.salaryContainer}>
+            <h3 className={styles.heading}>
+              Сотрудник: {selectedEmployee.name}
+            </h3>
+            <p>
+              Период: с {dates.from} по {dates.to}
+            </p>
+            <p>Часов отработал: {workHours}</p>
+            <p>Заработал: {salary} р</p>
+          </div>
+          {workShifts && (
+            <WorkShiftsHistory data={workShifts} title="Смены в расчете" />
+          )}
+        </div>
+      )}
+      {isMobile && tabValue === "form" && (
+        <div className={styles.formContainer}>
+          <EmployeesList />
+          <FormGroup onSubmit={handleSubmit}>
+            <Input name="from" placeholder="С даты" type="date" />
+            <Input name="to" placeholder="По дату" type="date" />
+            <Button label="Расчитать" />
+          </FormGroup>
+        </div>
+      )}
+
+      {isMobile && tabValue === "result" && (
+        <div className={styles.resultContainer}>
+          <div className={styles.salaryContainer}>
+            <h3 className={styles.heading}>
+              Сотрудник: {selectedEmployee.name}
+            </h3>
+            <p>
+              Период: с {dates.from} по {dates.to}
+            </p>
+            <p>Часов отработал: {workHours}</p>
+            <p>Заработал: {salary} р</p>
+          </div>
+          {workShifts && (
+            <WorkShiftsHistory data={workShifts} title="Смены в расчете" />
+          )}
+        </div>
+      )}
     </section>
   );
 };
