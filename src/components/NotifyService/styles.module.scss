@@ -1,0 +1,31 @@
+@use '../../assets/styles/variables';
+@use '../../assets/styles/mixins';
+
+.container {
+  width: 250px;
+  height: 100px;
+  position: fixed;
+  right: 2%;
+  bottom: 10%;
+  background: variables.$color-palette-input-color-task;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  transform: translateX(150%);
+  transition: transform 500ms;
+  padding: 5px;
+}
+.message {
+  width: 100%;
+  text-align: center;
+}
+
+.enter {
+  transform: translateX(0);
+  transition: transform 500ms;
+}
+
+@media screen and (max-width:320px) {
+
+}

@@ -11,6 +11,8 @@ import {
   useLoginMutation,
 } from "../../store/auth/auth.api.ts";
 import { useEffect } from "react";
+import { useAppDispatch } from "../../hooks/store.ts";
+import { showNotify } from "../../store/notifyService/notifyServiceSlice.ts";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,9 +22,15 @@ const Login = () => {
   ] = useLoginMutation();
   const { data: _, refetch } = useGetUserDataQuery();
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (loginData && loginData.accessToken) {
       localStorage.setItem("token", loginData.accessToken);
+      dispatch(showNotify("Успешный вход!"));
+    }
+    if (loginError) {
+      dispatch(showNotify("Ошибка входа"));
     }
   }, [loginError, loginSuccess, loginData]);
 

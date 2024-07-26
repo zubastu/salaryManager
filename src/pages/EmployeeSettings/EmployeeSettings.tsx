@@ -14,6 +14,7 @@ import { TEmployeeForm } from "../../types";
 import { useEffect, useState } from "react";
 import { resetEmployee } from "../../store/employeeSelectionSlice/employeeSelectionSlice.ts";
 import { Tab } from "../../components/Tab/Tab.tsx";
+import { showNotify } from "../../store/notifyService/notifyServiceSlice.ts";
 
 enum Tabs {
   add = "ADD",
@@ -28,12 +29,18 @@ const EmployeeSettings = () => {
   const { selectedEmployee } = useAppSelector(
     (store) => store.selectedEmployee,
   );
-  const [deleteEmployee, { isSuccess: isSuccessDelete }] =
-    useDeleteEmployeeMutation();
-  const [createEmployee, { isSuccess: isSuccessCreate }] =
-    useCreateEmployeeMutation();
-  const [updateEmployee, { isSuccess: isSuccessUpdate }] =
-    useUpdateEmployeeParamsMutation();
+  const [
+    deleteEmployee,
+    { isSuccess: isSuccessDelete, isError: isErrorDelete },
+  ] = useDeleteEmployeeMutation();
+  const [
+    createEmployee,
+    { isSuccess: isSuccessCreate, isError: isErrorCreate },
+  ] = useCreateEmployeeMutation();
+  const [
+    updateEmployee,
+    { isSuccess: isSuccessUpdate, isError: isErrorUpdate },
+  ] = useUpdateEmployeeParamsMutation();
 
   const handleSubmitCreate: SubmitHandler<TEmployeeForm> = async (data) => {
     await createEmployee(data);
@@ -47,11 +54,46 @@ const EmployeeSettings = () => {
     await deleteEmployee(selectedEmployee.id);
   };
   useEffect(() => {
+    dispatch(resetEmployee());
+  }, [tab]);
+
+  useEffect(() => {
+    if (isSuccessUpdate) {
+      dispatch(resetEmployee());
+      dispatch(showNotify("Сотрудник успешно обновлен"));
+    }
+  }, [isSuccessUpdate]);
+
+  useEffect(() => {
+    if (isErrorUpdate) {
+      dispatch(showNotify("Ошибка обновления сотрудника"));
+    }
+  }, [isErrorUpdate]);
+
+  useEffect(() => {
     if (isSuccessDelete) {
       dispatch(resetEmployee());
+      dispatch(showNotify("Сотрудник успешно удален"));
     }
-    dispatch(resetEmployee());
-  }, [isSuccessDelete, tab]);
+  }, [isSuccessDelete]);
+
+  useEffect(() => {
+    if (isErrorDelete) {
+      dispatch(showNotify("Ошибка удаления сотрудника"));
+    }
+  }, [isErrorDelete]);
+
+  useEffect(() => {
+    if (isSuccessCreate) {
+      dispatch(showNotify("Сотрудник успешно добавлен"));
+    }
+  }, [isSuccessCreate]);
+
+  useEffect(() => {
+    if (isErrorCreate) {
+      dispatch(showNotify("Ошибка добавления сотрудника"));
+    }
+  }, [isErrorCreate]);
 
   return (
     <section className={styles.container}>

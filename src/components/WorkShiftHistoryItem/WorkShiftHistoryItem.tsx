@@ -1,16 +1,33 @@
 import styles from "./styles.module.scss";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { TWorkShift } from "../../types";
-import { useDeleteWorkShiftMutation } from "../../store/workShifts/workShifts.api.ts";
+import {
+  useDeleteWorkShiftMutation,
+  workShiftsApi,
+} from "../../store/workShifts/workShifts.api.ts";
 import Button from "../Button/Button.tsx";
 import { useGetUserDataQuery } from "../../store/auth/auth.api.ts";
+import { useAppDispatch } from "../../hooks/store.ts";
+import { showNotify } from "../../store/notifyService/notifyServiceSlice.ts";
 
 type TWorkShiftHistoryItem = {
   workShift: TWorkShift;
 };
 const WorkShiftHistoryItem: FC<TWorkShiftHistoryItem> = ({ workShift }) => {
-  const [deleteWorkShift, {}] = useDeleteWorkShiftMutation();
+  const [deleteWorkShift, { isSuccess: deleteSuccess, isError: deleteError }] =
+    useDeleteWorkShiftMutation();
   const { data: user } = useGetUserDataQuery();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (deleteSuccess) {
+      dispatch(showNotify("Смена успешно удалена"));
+      dispatch(workShiftsApi.util?.invalidateTags(["WorkShiftsEmployee"]));
+    }
+    if (deleteError) {
+      dispatch(showNotify("Ошибка удаления смены"));
+    }
+  }, [deleteSuccess, deleteError]);
   const handleDelete = async () => {
     await deleteWorkShift(workShift.id);
   };

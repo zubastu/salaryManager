@@ -18,7 +18,7 @@ import { useGetUserDataQuery } from "../../store/auth/auth.api.ts";
 import { sortCallback } from "../../utils/sortHelper.ts";
 import { Tab } from "../../components/Tab/Tab.tsx";
 import useWindowDimensions from "../../hooks/resize.ts";
-//import { getCountOfSalaryByEmployeeNames } from "./utils/getCountOfSalaryByEmployeeNames.ts";
+import { showNotify } from "../../store/notifyService/notifyServiceSlice.ts";
 
 const WorkShifts = () => {
   const [isNightWork, setIsNightWork] = useState(false);
@@ -27,8 +27,10 @@ const WorkShifts = () => {
   );
   const { width } = useWindowDimensions();
 
-  const [postWorkShift, { isSuccess: successPostWorkShift }] =
-    usePostWorkShiftMutation();
+  const [
+    postWorkShift,
+    { isSuccess: successPostWorkShift, isError: errorPostWorkShift },
+  ] = usePostWorkShiftMutation();
   const { data } = useGetAllWorkShiftsQuery();
   const { data: user } = useGetUserDataQuery();
 
@@ -37,9 +39,16 @@ const WorkShifts = () => {
   useEffect(() => {
     if (successPostWorkShift) {
       dispatch(resetEmployee());
+      dispatch(showNotify("Смена успешно зарегистрирована!"));
     }
     dispatch(resetEmployee());
   }, [successPostWorkShift]);
+
+  useEffect(() => {
+    if (errorPostWorkShift) {
+      dispatch(showNotify("Все поля обязательны"));
+    }
+  }, [errorPostWorkShift]);
 
   const { selectedEmployee } = useAppSelector(
     (store) => store.selectedEmployee,

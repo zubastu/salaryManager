@@ -8,7 +8,7 @@ export const workShiftsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
   }),
-  tagTypes: ["WorkShiftsHistory", "WorkShiftsEmployee"],
+  tagTypes: ["WorkShiftsHistory", "WorkShiftsEmployee", "CountCase"],
   endpoints: (build) => ({
     getAllWorkShifts: build.query<TWorkShift[], void>({
       query: () => ({
@@ -34,6 +34,16 @@ export const workShiftsApi = createApi({
         headers: getHeaders(true),
       }),
       providesTags: () => ["WorkShiftsEmployee"],
+    }),
+
+    getAllWorkShiftsBetweenDates: build.query<TWorkShift[], any>({
+      query: (data) => ({
+        url: "/work_shifts/dates",
+        body: { startDate: data.startDate, endDate: data.endDate },
+        method: "POST",
+        headers: getHeaders(true),
+      }),
+      providesTags: () => ["CountCase"],
     }),
 
     postWorkShift: build.mutation<TWorkShift[], TWorkShiftProperties>({
@@ -64,4 +74,5 @@ export const {
   useDeleteWorkShiftMutation,
   useLazyGetEmployeeWorkShiftsQuery,
   useLazyGetEmployeeWorkShiftsBetweenDatesQuery,
+  useLazyGetAllWorkShiftsBetweenDatesQuery,
 } = workShiftsApi;

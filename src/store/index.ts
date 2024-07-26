@@ -5,11 +5,13 @@ import { employeeSelectionSlice } from "./employeeSelectionSlice/employeeSelecti
 import { workShiftsApi } from "./workShifts/workShifts.api.ts";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { navigationPopupSlice } from "./navigationPopupSlice/navigationPopupSlice.ts";
+import { notifyServiceSlice } from "./notifyService/notifyServiceSlice.ts";
 
 export const store = configureStore({
   reducer: {
     selectedEmployee: employeeSelectionSlice.reducer,
     navigationPopup: navigationPopupSlice.reducer,
+    notifyService: notifyServiceSlice.reducer,
     [employeesApi.reducerPath]: employeesApi.reducer,
     [workShiftsApi.reducerPath]: workShiftsApi.reducer,
     [authApi.reducerPath]: authApi.reducer,

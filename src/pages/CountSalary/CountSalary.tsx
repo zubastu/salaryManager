@@ -15,8 +15,9 @@ import { SubmitHandler } from "react-hook-form";
 import { TWorkShift } from "../../types";
 import useWindowDimensions from "../../hooks/resize.ts";
 import { Tab } from "../../components/Tab/Tab.tsx";
+import { showNotify } from "../../store/notifyService/notifyServiceSlice.ts";
 
-type TDateForm = {
+export type TDateForm = {
   from: string;
   to: string;
 };
@@ -46,7 +47,7 @@ const CountSalary = () => {
   }, []);
 
   const handleSubmit: SubmitHandler<TDateForm> = async (data) => {
-    if (selectedEmployee.id !== "") {
+    if (selectedEmployee.id !== "" && data.from && data.to) {
       dispatch(workShiftsApi.util?.invalidateTags(["WorkShiftsEmployee"]));
       await getShifts({
         user_id: selectedEmployee.id,
@@ -58,6 +59,8 @@ const CountSalary = () => {
         to: data.to,
       });
       isMobile && setTabValue("result");
+    } else {
+      dispatch(showNotify("Необходимо выбрать даты и сотрудника"));
     }
   };
 

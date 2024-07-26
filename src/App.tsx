@@ -8,6 +8,8 @@ import EmployeeSettings from "./pages/EmployeeSettings/EmployeeSettings.tsx";
 import CountSalary from "./pages/CountSalary/CountSalary.tsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.tsx";
 import NavigationPopup from "./components/NavigationModal/NavigationPopup.tsx";
+import CountCase from "./pages/CountCase/CountCase.tsx";
+import NotifyService from "./components/NotifyService/NotifyService.tsx";
 
 function App() {
   const location = useLocation();
@@ -36,6 +38,12 @@ function App() {
             }
             path={routes.employeeSettings}
           />
+          <Route
+            element={
+              <ProtectedRoute element={<CountCase />} adminOnly={true} />
+            }
+            path={routes.countCase}
+          />
           <Route element={<Login />} path={routes.login} />
           <Route
             element={<Navigate to={routes.workShifts} replace={true} />}
@@ -43,6 +51,7 @@ function App() {
           />
         </Routes>
         <NavigationPopup />
+        <NotifyService />
       </main>
     </>
   );

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import styles from "./NavigationPopup.module.scss";
+import styles from "./styles.module.scss";
 import { NavLink, useLocation } from "react-router-dom";
 import Button from "../Button/Button.tsx";
 import { routes } from "../../utils/routes.ts";
