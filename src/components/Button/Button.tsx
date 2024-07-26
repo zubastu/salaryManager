@@ -14,7 +14,7 @@ const Button: FC<ButtonProps> = (props) => {
   const { label, disabled, type = "submit", extraStyles, ...rest } = props;
   return (
     <button
-      className={`${styles.submitButton} ${extraStyles}`}
+      className={`${styles.button} ${extraStyles}`}
       type={type}
       disabled={disabled ? disabled : false}
       {...rest}

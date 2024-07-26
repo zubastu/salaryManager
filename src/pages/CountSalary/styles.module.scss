@@ -15,7 +15,6 @@
   display: flex;
   flex-direction: column;
   border-radius: 15px;
-  margin: 15px;
 }
 
 .resultContainer {
@@ -42,14 +41,16 @@
   }
 }
 
+@media screen and (max-width: 900px) {
+  .salaryContainer {
+    padding: 10px 10px 0 10px;
+    height: min-content;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .container {
     padding: 0;
-  }
-  .salaryContainer {
-    margin: 0;
-    padding: 10px 10px 0 10px;
-    height: min-content;
   }
   .tabs {
     padding: 0;

@@ -12,7 +12,8 @@ import {
 } from "../../store/auth/auth.api.ts";
 import { useEffect } from "react";
 import { useAppDispatch } from "../../hooks/store.ts";
-import { showNotify } from "../../store/notifyService/notifyServiceSlice.ts";
+import { showNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
+import { validation } from "../../utils/validation.ts";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -48,8 +49,18 @@ const Login = () => {
   return (
     <section className={styles.container}>
       <FormGroup onSubmit={handleSubmit}>
-        <Input name="username" placeholder="Имя пользовтеля" type="text" />
-        <Input name="password" placeholder="Пароль" type="password" />
+        <Input
+          name="username"
+          placeholder="Имя пользовтеля"
+          type="text"
+          validation={validation.username}
+        />
+        <Input
+          name="password"
+          placeholder="Пароль"
+          type="password"
+          validation={validation.password}
+        />
         <Button label="Войти" />
         <Link className={styles.link} to={routes.workShifts}>
           Назад к сменам

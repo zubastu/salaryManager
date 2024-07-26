@@ -5,7 +5,7 @@ import { routes } from "../../utils/routes.ts";
 import Modal from "../Modal/Modal.tsx";
 import Loader from "../Loader/Loader.tsx";
 import { useAppDispatch } from "../../hooks/store.ts";
-import { showNotify } from "../../store/notifyService/notifyServiceSlice.ts";
+import { showNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
 
 type TProtectedRouteProps = {
   element: ReactNode | ReactElement;
@@ -23,7 +23,7 @@ const ProtectedRoute: FC<TProtectedRouteProps> = ({ element, adminOnly }) => {
 
   if (isFetching) {
     return (
-      <Modal>
+      <Modal isOpen={false}>
         <Loader />
       </Modal>
     );

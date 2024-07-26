@@ -6,7 +6,6 @@ import EmployeesList from "../../components/EmployeesList/EmployeesList.tsx";
 import { useAppDispatch, useAppSelector } from "../../hooks/store.ts";
 import {
   useCreateEmployeeMutation,
-  useDeleteEmployeeMutation,
   useUpdateEmployeeParamsMutation,
 } from "../../store/employees/employees.api.ts";
 import { SubmitHandler } from "react-hook-form";
@@ -14,7 +13,9 @@ import { TEmployeeForm } from "../../types";
 import { useEffect, useState } from "react";
 import { resetEmployee } from "../../store/employeeSelectionSlice/employeeSelectionSlice.ts";
 import { Tab } from "../../components/Tab/Tab.tsx";
-import { showNotify } from "../../store/notifyService/notifyServiceSlice.ts";
+import { showNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
+import { openConfirmModalEmployee } from "../../store/confirmDeleteEmployeeModalSlice/confirmDeleteEmployeeModalSlice.ts";
+import { validation } from "../../utils/validation.ts";
 
 enum Tabs {
   add = "ADD",
@@ -30,10 +31,6 @@ const EmployeeSettings = () => {
     (store) => store.selectedEmployee,
   );
   const [
-    deleteEmployee,
-    { isSuccess: isSuccessDelete, isError: isErrorDelete },
-  ] = useDeleteEmployeeMutation();
-  const [
     createEmployee,
     { isSuccess: isSuccessCreate, isError: isErrorCreate },
   ] = useCreateEmployeeMutation();
@@ -47,12 +44,21 @@ const EmployeeSettings = () => {
   };
 
   const handleSubmitUpdate: SubmitHandler<TEmployeeForm> = async (data) => {
-    await updateEmployee({ ...data, id: selectedEmployee.id });
+    if (selectedEmployee.id) {
+      await updateEmployee({ ...data, id: selectedEmployee.id });
+    } else {
+      dispatch(showNotify("Нужно выбрать сотрудника"));
+    }
   };
 
-  const handleSubmitDelete = async () => {
-    await deleteEmployee(selectedEmployee.id);
+  const handleOpenConfirmModal = async () => {
+    if (selectedEmployee.id) {
+      dispatch(openConfirmModalEmployee(selectedEmployee.id));
+    } else {
+      dispatch(showNotify("Нужно выбрать сотрудника"));
+    }
   };
+
   useEffect(() => {
     dispatch(resetEmployee());
   }, [tab]);
@@ -69,19 +75,6 @@ const EmployeeSettings = () => {
       dispatch(showNotify("Ошибка обновления сотрудника"));
     }
   }, [isErrorUpdate]);
-
-  useEffect(() => {
-    if (isSuccessDelete) {
-      dispatch(resetEmployee());
-      dispatch(showNotify("Сотрудник успешно удален"));
-    }
-  }, [isSuccessDelete]);
-
-  useEffect(() => {
-    if (isErrorDelete) {
-      dispatch(showNotify("Ошибка удаления сотрудника"));
-    }
-  }, [isErrorDelete]);
 
   useEffect(() => {
     if (isSuccessCreate) {
@@ -122,9 +115,21 @@ const EmployeeSettings = () => {
             <h3 className={styles.heading}>Добавить сотрудника</h3>
 
             <FormGroup onSubmit={handleSubmitCreate} isReset={isSuccessCreate}>
-              <Input name="username" placeholder="Логин сотрудника" />
-              <Input name="name" placeholder="Имя сотрудника" />
-              <Input name="password" placeholder="Пароль сотрудника" />
+              <Input
+                name="username"
+                placeholder="Логин сотрудника"
+                validation={validation.username}
+              />
+              <Input
+                name="name"
+                placeholder="Имя сотрудника"
+                validation={validation.name}
+              />
+              <Input
+                name="password"
+                placeholder="Пароль сотрудника"
+                validation={validation.password}
+              />
               <Button label="Добавить" />
             </FormGroup>
           </div>
@@ -138,7 +143,11 @@ const EmployeeSettings = () => {
             </p>
 
             <FormGroup onSubmit={handleSubmitUpdate} isReset={isSuccessUpdate}>
-              <Input name="name" placeholder="Имя сотрудника" />
+              <Input
+                name="name"
+                placeholder="Имя сотрудника"
+                validation={validation.name}
+              />
               <Button label="Изменить" />
             </FormGroup>
           </div>
@@ -150,7 +159,7 @@ const EmployeeSettings = () => {
               {selectedEmployee.name}
             </p>
 
-            <FormGroup onSubmit={handleSubmitDelete}>
+            <FormGroup onSubmit={handleOpenConfirmModal}>
               <Button label="Удалить" />
             </FormGroup>
           </div>

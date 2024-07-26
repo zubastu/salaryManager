@@ -45,10 +45,10 @@
   flex: 1 1;
 }
 
-.remove {
-  width: 30px;
-  height: 30px;
-  color: variables.$color-palette-error;
+.removeButton {
+  max-width: 30px;
+  max-height: 30px;
+  color: variables.$color-palette-error!important;
   border-radius: 50%;
 }
 

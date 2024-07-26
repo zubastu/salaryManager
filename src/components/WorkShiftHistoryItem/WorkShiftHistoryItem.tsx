@@ -1,39 +1,26 @@
 import styles from "./styles.module.scss";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { TWorkShift } from "../../types";
-import {
-  useDeleteWorkShiftMutation,
-  workShiftsApi,
-} from "../../store/workShifts/workShifts.api.ts";
+
 import Button from "../Button/Button.tsx";
 import { useGetUserDataQuery } from "../../store/auth/auth.api.ts";
 import { useAppDispatch } from "../../hooks/store.ts";
-import { showNotify } from "../../store/notifyService/notifyServiceSlice.ts";
+import { openConfirmModalShift } from "../../store/confirmDeleteWorkShiftModalSlice/confirmDeleteWorkShiftModalSlice.ts";
 
 type TWorkShiftHistoryItem = {
   workShift: TWorkShift;
 };
 const WorkShiftHistoryItem: FC<TWorkShiftHistoryItem> = ({ workShift }) => {
-  const [deleteWorkShift, { isSuccess: deleteSuccess, isError: deleteError }] =
-    useDeleteWorkShiftMutation();
   const { data: user } = useGetUserDataQuery();
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (deleteSuccess) {
-      dispatch(showNotify("Смена успешно удалена"));
-      dispatch(workShiftsApi.util?.invalidateTags(["WorkShiftsEmployee"]));
-    }
-    if (deleteError) {
-      dispatch(showNotify("Ошибка удаления смены"));
-    }
-  }, [deleteSuccess, deleteError]);
-  const handleDelete = async () => {
-    await deleteWorkShift(workShift.id);
+  const handleOpenUpdateModal = () => {};
+  const handleOpenDeleteModal = () => {
+    dispatch(openConfirmModalShift(workShift.id));
   };
 
   return (
-    <li className={styles.listItem}>
+    <li className={styles.listItem} onClick={handleOpenUpdateModal}>
       <div className={styles.wrapper}>
         <p className={styles.listItemPropName}>Имя:</p>
         <p className={styles.listItemPropValue}>{workShift.user.name}</p>
@@ -87,8 +74,9 @@ const WorkShiftHistoryItem: FC<TWorkShiftHistoryItem> = ({ workShift }) => {
         <div className={styles.removeButtonContainer}>
           <Button
             label="X"
-            onClick={handleDelete}
-            extraStyles={styles.remove}
+            type="button"
+            onClick={handleOpenDeleteModal}
+            extraStyles={styles.removeButton}
           />
         </div>
       )}

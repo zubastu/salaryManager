@@ -10,6 +10,8 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.tsx";
 import NavigationPopup from "./components/NavigationModal/NavigationPopup.tsx";
 import CountCase from "./pages/CountCase/CountCase.tsx";
 import NotifyService from "./components/NotifyService/NotifyService.tsx";
+import ConfirmDeleteEmployeeModal from "./components/ConfirmDeleteEmployeeModal/ConfirmDeleteEmployeeModal.tsx";
+import ConfirmDeleteWorkShiftModal from "./components/ConfirmDeleteWorkShiftModal/ConfirmDeleteWorkShiftModal.tsx";
 
 function App() {
   const location = useLocation();
@@ -52,6 +54,8 @@ function App() {
         </Routes>
         <NavigationPopup />
         <NotifyService />
+        <ConfirmDeleteEmployeeModal />
+        <ConfirmDeleteWorkShiftModal />
       </main>
     </>
   );

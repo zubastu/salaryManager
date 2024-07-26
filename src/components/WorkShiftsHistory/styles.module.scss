@@ -31,6 +31,12 @@
   }
 }
 
+@media screen and (max-width: 1800px) {
+  .list {
+    min-height: 40dvh;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   .container {
     min-height: 30%;

@@ -15,7 +15,7 @@ import { SubmitHandler } from "react-hook-form";
 import { TWorkShift } from "../../types";
 import useWindowDimensions from "../../hooks/resize.ts";
 import { Tab } from "../../components/Tab/Tab.tsx";
-import { showNotify } from "../../store/notifyService/notifyServiceSlice.ts";
+import { showNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
 
 export type TDateForm = {
   from: string;

@@ -1,7 +1,7 @@
 @use '../../assets/styles/variables';
 @use '../../assets/styles/mixins';
 
-.submitButton {
+.button {
   margin: 0;
   padding: 0;
   border: none;
@@ -13,7 +13,7 @@
   @include mixins.typography-l;
 
 }
-.submitButton:hover {
+.button:hover {
   @include mixins.transition-opacity;
   opacity: .8;
 }
