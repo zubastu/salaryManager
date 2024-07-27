@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "deploy": "npm run build && scp -r ./dist/* salary:/var/www/frontend"
+    "deploy": "npm run build && scp -r ./dist/* salary:/var/www/frontend",
+    "deploy-protfolio": "npm run build && scp -r ./dist/* zubastu:/var/www/salary_manager"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
