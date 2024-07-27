@@ -9,7 +9,7 @@ const initialState: TConfirmDeleteEmployeeModalSlice = {
   isOpen: false,
 };
 
-export const ConfirmDeleteEmployeeModalSlice = createSlice({
+export const confirmDeleteEmployeeModalSlice = createSlice({
   name: "confirmDeleteEmployeeModalSlice",
   initialState,
   reducers: {
@@ -26,4 +26,4 @@ export const ConfirmDeleteEmployeeModalSlice = createSlice({
 });
 
 export const { openConfirmModalEmployee, closeConfirmModalEmployee } =
-  ConfirmDeleteEmployeeModalSlice.actions;
+  confirmDeleteEmployeeModalSlice.actions;

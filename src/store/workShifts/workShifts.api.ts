@@ -56,6 +56,23 @@ export const workShiftsApi = createApi({
       invalidatesTags: () => ["WorkShiftsHistory"],
     }),
 
+    updateWorkShift: build.mutation<
+      TWorkShift[],
+      { data: TWorkShiftProperties; workShiftId: string }
+    >({
+      query: ({ data, workShiftId }) => ({
+        url: `/work_shifts/${workShiftId}`,
+        headers: getHeaders(true),
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: () => [
+        "WorkShiftsHistory",
+        "WorkShiftsEmployee",
+        "CountCase",
+      ],
+    }),
+
     deleteWorkShift: build.mutation<TWorkShift[], string>({
       query: (id) => ({
         url: `/work_shifts/${id}`,
@@ -72,7 +89,7 @@ export const {
   useGetAllWorkShiftsQuery,
   usePostWorkShiftMutation,
   useDeleteWorkShiftMutation,
-  useLazyGetEmployeeWorkShiftsQuery,
+  useUpdateWorkShiftMutation,
   useLazyGetEmployeeWorkShiftsBetweenDatesQuery,
   useLazyGetAllWorkShiftsBetweenDatesQuery,
 } = workShiftsApi;

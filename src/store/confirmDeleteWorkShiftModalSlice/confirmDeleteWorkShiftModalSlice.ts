@@ -9,7 +9,7 @@ const initialState: TConfirmDeleteWorkShiftModalSlice = {
   isOpen: false,
 };
 
-export const ConfirmDeleteWorkShiftModalSlice = createSlice({
+export const confirmDeleteWorkShiftModalSlice = createSlice({
   name: "confirmDeleteWorkShiftModalSlice",
   initialState,
   reducers: {
@@ -26,4 +26,4 @@ export const ConfirmDeleteWorkShiftModalSlice = createSlice({
 });
 
 export const { openConfirmModalShift, closeConfirmModalShift } =
-  ConfirmDeleteWorkShiftModalSlice.actions;
+  confirmDeleteWorkShiftModalSlice.actions;

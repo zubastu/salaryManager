@@ -1,18 +1,18 @@
 @use '../../assets/styles/variables';
 @use '../../assets/styles/mixins';
 
+.container {
+  display: flex;
+  border-bottom: 1px solid variables.$color-palette-white;
+}
+
 .listItem {
   color: variables.$color-palette-white;
   display: flex;
   align-items: center;
   gap: 10px;
-  border-bottom: 1px solid variables.$color-palette-white;
   cursor: pointer;
-  transition: all ease .5s;
-  &:hover {
-    color: variables.$color-palette-green;
-    transition: all ease .5s;
-  }
+  min-height: 80px;
 }
 
 .wrapper {
@@ -41,14 +41,27 @@
 
 .removeButtonContainer {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 5px;
   flex: 1 1;
 }
 
 .removeButton {
   max-width: 30px;
   max-height: 30px;
+  min-width: 30px;
+  min-height: 30px;
   color: variables.$color-palette-error!important;
+  border-radius: 50%;
+}
+
+.updateButton {
+  max-width: 30px;
+  max-height: 30px;
+  min-width: 30px;
+  min-height: 30px;
   border-radius: 50%;
 }
 
@@ -66,6 +79,11 @@
 
   .listItemPropName {
     @include mixins.typography-xs;
+  }
+
+  .removeButtonContainer {
+    min-height: 90px;
+    justify-content: space-evenly;
   }
 }
 
@@ -90,6 +108,8 @@
     justify-content: center;
     align-items: center;
   }
+
+
 }
 
 @media screen and (max-width: 332px) {

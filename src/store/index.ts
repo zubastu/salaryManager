@@ -6,16 +6,18 @@ import { workShiftsApi } from "./workShifts/workShifts.api.ts";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { navigationPopupSlice } from "./navigationPopupSlice/navigationPopupSlice.ts";
 import { notifyServiceSlice } from "./notifyServiceSlice/notifyServiceSlice.ts";
-import { ConfirmDeleteWorkShiftModalSlice } from "./confirmDeleteWorkShiftModalSlice/confirmDeleteWorkShiftModalSlice.ts";
-import { ConfirmDeleteEmployeeModalSlice } from "./confirmDeleteEmployeeModalSlice/confirmDeleteEmployeeModalSlice.ts";
+import { confirmDeleteWorkShiftModalSlice } from "./confirmDeleteWorkShiftModalSlice/confirmDeleteWorkShiftModalSlice.ts";
+import { confirmDeleteEmployeeModalSlice } from "./confirmDeleteEmployeeModalSlice/confirmDeleteEmployeeModalSlice.ts";
+import { updateWorkShiftModalSlice } from "./updateWorkShiftModalSlice/updateWorkShiftModalSlice.ts";
 
 export const store = configureStore({
   reducer: {
     selectedEmployee: employeeSelectionSlice.reducer,
     navigationPopup: navigationPopupSlice.reducer,
     notifyService: notifyServiceSlice.reducer,
-    confirmDeleteWorkShiftModal: ConfirmDeleteWorkShiftModalSlice.reducer,
-    confirmDeleteEmployeeModal: ConfirmDeleteEmployeeModalSlice.reducer,
+    confirmDeleteWorkShiftModal: confirmDeleteWorkShiftModalSlice.reducer,
+    confirmDeleteEmployeeModal: confirmDeleteEmployeeModalSlice.reducer,
+    updateWorkShiftModal: updateWorkShiftModalSlice.reducer,
     [employeesApi.reducerPath]: employeesApi.reducer,
     [workShiftsApi.reducerPath]: workShiftsApi.reducer,
     [authApi.reducerPath]: authApi.reducer,

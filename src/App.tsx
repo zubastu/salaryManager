@@ -12,6 +12,7 @@ import CountCase from "./pages/CountCase/CountCase.tsx";
 import NotifyService from "./components/NotifyService/NotifyService.tsx";
 import ConfirmDeleteEmployeeModal from "./components/ConfirmDeleteEmployeeModal/ConfirmDeleteEmployeeModal.tsx";
 import ConfirmDeleteWorkShiftModal from "./components/ConfirmDeleteWorkShiftModal/ConfirmDeleteWorkShiftModal.tsx";
+import UpdateWorkShiftModal from "./components/UpdateWorkShiftModal/UpdateWorkShiftModal.tsx";
 
 function App() {
   const location = useLocation();
@@ -56,6 +57,7 @@ function App() {
         <NotifyService />
         <ConfirmDeleteEmployeeModal />
         <ConfirmDeleteWorkShiftModal />
+        <UpdateWorkShiftModal />
       </main>
     </>
   );

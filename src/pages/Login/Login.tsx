@@ -4,7 +4,7 @@ import Input from "../../components/Input/Input.tsx";
 import Button from "../../components/Button/Button.tsx";
 import { SubmitHandler } from "react-hook-form";
 import { TLogin } from "../../types";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { routes } from "../../utils/routes.ts";
 import {
   useGetUserDataQuery,
@@ -62,9 +62,6 @@ const Login = () => {
           validation={validation.password}
         />
         <Button label="Войти" />
-        <Link className={styles.link} to={routes.workShifts}>
-          Назад к сменам
-        </Link>
       </FormGroup>
     </section>
   );
