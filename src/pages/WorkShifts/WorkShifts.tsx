@@ -7,7 +7,6 @@ import EmployeesList from "../../components/EmployeesList/EmployeesList.tsx";
 import { useGetAllWorkShiftsQuery } from "../../store/workShifts/workShifts.api.ts";
 
 import { useGetUserDataQuery } from "../../store/auth/auth.api.ts";
-import { sortCallback } from "../../utils/sortHelper.ts";
 import { Tab } from "../../components/Tab/Tab.tsx";
 import useWindowDimensions from "../../hooks/resize.ts";
 import WorkShiftsForm from "../../components/WorkShiftsForm/WorkShiftsForm.tsx";
@@ -20,8 +19,6 @@ const WorkShifts = () => {
 
   const { data } = useGetAllWorkShiftsQuery();
   const { data: user } = useGetUserDataQuery();
-
-  const newData = data && [...data].sort((a, b) => sortCallback(a, b));
 
   const isMobile = width <= 1180;
 
@@ -55,12 +52,12 @@ const WorkShifts = () => {
 
         {isMobile && tabValue === "workShifts" && <WorkShiftsForm />}
 
-        {data && newData && isMobile && tabValue === "history" && (
-          <WorkShiftsHistory data={newData} title="История рабочих смен" />
+        {data && isMobile && tabValue === "history" && (
+          <WorkShiftsHistory data={data} title="История рабочих смен" />
         )}
       </div>
-      {data && newData && !isMobile && (
-        <WorkShiftsHistory data={newData} title="История рабочих смен" />
+      {data && !isMobile && (
+        <WorkShiftsHistory data={data} title="История рабочих смен" />
       )}
     </section>
   );

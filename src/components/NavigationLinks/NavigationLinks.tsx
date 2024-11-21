@@ -59,6 +59,17 @@ const NavigationLinks = () => {
           Коэфф.
         </NavLink>
       </li>
+
+      <li>
+        <NavLink
+          to={routes.countCase}
+          className={({ isActive }) =>
+            isActive ? styles.linkActive : styles.link
+          }
+        >
+          Подсчет кассы
+        </NavLink>
+      </li>
     </ul>
   );
 };

@@ -62,3 +62,12 @@ export type TEmployeeForm = {
 export type TEmployeeFormWithId = TEmployeeForm & {
   id: string;
 };
+
+export type TCountCaseItem = {
+  id: string;
+  employee: string;
+  date: string;
+  resultCashInCase: number;
+  factInCase: number;
+  isNightShift: boolean;
+};

@@ -1,0 +1,13 @@
+@import '../../assets/styles/mixins';
+@import '../../assets/styles/variables';
+
+.container {
+  display: flex;
+  border: 1px solid $color-palette-white;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.incorrect {
+  color: $color-palette-error;
+}

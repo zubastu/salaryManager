@@ -48,7 +48,6 @@ const Login = () => {
 
   const handleAdminSignin = () => {
     login({username: 'administrator', password: "salary3452"})
-
   }
 
   return (
@@ -71,6 +70,7 @@ const Login = () => {
 
       <p className={styles.protfolio}>Версия для портфолио</p>
       <Button type="button" label="Войти как Администратор" onClick={handleAdminSignin} />
+
     </section>
   );
 };

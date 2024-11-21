@@ -2,6 +2,26 @@
 @use '../../assets/styles/mixins';
 
 
+.container {
+  max-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.list {
+  max-height: 90%;
+  width: 100%;
+  overflow-y: scroll;
+  padding: 15px;
+  height: 100%;
+  border-left: 1px solid variables.$color-palette-white;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 600px) {
 
 }

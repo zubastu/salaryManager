@@ -12,7 +12,7 @@ const maxVal = (n: number) => ({
 
 const enum CommonErrorMessages {
   noSpaces = "Без пробелов",
-  latinLetters = "Только латинские буквы, разрешены дефисы и подчеркивания",
+  latinLetters = "Только латинские буквы, разрешены дефисы, подчеркивания и точки",
   atLeastOneLetter = "Минимум одна буква",
   noCharacters = "Из символов допускаются только дефисы и подчеркивания",
   firstUppercase = "Первая буква обязательно заглавная",
@@ -23,7 +23,7 @@ const noSpaces = (value: string) =>
   /^[^\s]*$/.test(value) ? true : CommonErrorMessages.noSpaces;
 
 const latinLetters = (value: string) =>
-  /^[a-zA-Z0-9_-\s]+$/.test(value) ? true : CommonErrorMessages.latinLetters;
+  /^[a-zA-Z0-9\._-\s]+$/.test(value) ? true : CommonErrorMessages.latinLetters;
 
 const atLeastOneLetter = (value: string) =>
   /^.*[a-zA-Z]+.*$/.test(value) ? true : CommonErrorMessages.atLeastOneLetter;
