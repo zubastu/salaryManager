@@ -1,11 +1,13 @@
-import { TWorkShift } from "../types";
+import { TCountCaseItem, TWorkShift } from "../types";
 
-export const countHelper = (data: TWorkShift[]) => {
+export const countHelper = (data: TWorkShift[]): TCountCaseItem[] => {
   const result: any = [];
 
   data.reduce((firstShift, secondShift) => {
     result.push({
+      id: secondShift.id,
       date: new Date(secondShift.date).toLocaleDateString(),
+      employee: secondShift.user.name,
       resultCashInCase:
         firstShift.cash_in_case! + secondShift.cash - secondShift.costs!,
       factInCase: secondShift.cash_in_case,
@@ -16,7 +18,3 @@ export const countHelper = (data: TWorkShift[]) => {
 
   return result;
 };
-/*
- 1. Получаю список смен из которых получаю расчет
- 2. Прохожу по списку смен reduce, считая нал.в кассе с текущей смены и нал.расчет - расходы с следующей смены и сравнить с фактически поданным числом со смены
- */

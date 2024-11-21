@@ -47,6 +47,12 @@ function App() {
             }
             path={routes.countCase}
           />
+          <Route
+            element={
+              <ProtectedRoute element={<CountSalary />} adminOnly={true} />
+            }
+            path={routes.countCase}
+          />
           <Route element={<Login />} path={routes.login} />
           <Route
             element={<Navigate to={routes.workShifts} replace={true} />}

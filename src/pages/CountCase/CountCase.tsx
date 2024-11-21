@@ -4,23 +4,23 @@ import Input from "../../components/Input/Input.tsx";
 import Button from "../../components/Button/Button.tsx";
 import FormGroup from "../../components/FormGroup/FormGroup.tsx";
 import { useEffect, useState } from "react";
-import { TWorkShift } from "../../types";
+import { TCountCaseItem } from "../../types";
 import { SubmitHandler } from "react-hook-form";
 import { TDateForm } from "../CountSalary/CountSalary.tsx";
 import { dayHours, nightHours } from "../../utils/constants.ts";
 import { countHelper } from "../../utils/countHelper.ts";
+import CountCaseItem from "../../components/CountCaseItem/CountCaseItem.tsx";
+import { sortCallback } from "../../utils/sortHelper.ts";
 
 const CountCase = () => {
   const [getWorkShifts, { data: workShiftsData }] =
     useLazyGetAllWorkShiftsBetweenDatesQuery();
-  const [dates, setDates] = useState<{ from: string; to: string }>({
+  const [_, setDates] = useState<{ from: string; to: string }>({
     from: "",
     to: "",
   });
-  const [workShifts, setWorkShifts] = useState<TWorkShift[]>([]);
 
-  const [result, setResult] = useState<any>([]);
-  console.log(workShifts, dates);
+  const [result, setResult] = useState<TCountCaseItem[]>([]);
   const handleSubmit: SubmitHandler<TDateForm> = (data) => {
     getWorkShifts({
       startDate: data.from + dayHours,
@@ -34,8 +34,7 @@ const CountCase = () => {
 
   useEffect(() => {
     if (workShiftsData && workShiftsData.length) {
-      setWorkShifts(workShiftsData);
-      setResult(countHelper([...workShiftsData].reverse()));
+      setResult(countHelper([...workShiftsData].sort(sortCallback)));
     }
   }, [workShiftsData]);
 
@@ -47,7 +46,9 @@ const CountCase = () => {
         <Button label="Расчитать" />
       </FormGroup>
 
-      {result && <div>{JSON.stringify(result)}</div>}
+      <ul className={styles.list}>
+        {result?.map((item) => <CountCaseItem item={item} key={item.id} />)}
+      </ul>
     </section>
   );
 };
