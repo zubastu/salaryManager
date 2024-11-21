@@ -46,9 +46,7 @@ const Login = () => {
     login(data);
   };
 
-  const handleAdminSignin = () => {
-    login({username: 'administrator', password: "salary3452"})
-  }
+
 
   return (
     <section className={styles.container}>
