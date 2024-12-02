@@ -7,9 +7,9 @@ export const getSalary = (
   selectedEmployee: TEmployeeListItem,
 ): TWorkShiftProperties => {
   const { workHours, gain } = data;
-  const pricePerHour = 200;
-  const valueOfGainGood = isNightWork ? 7000 : 10000;
-  const valueOfGainVeryGood = isNightWork ? 12000 : 16000;
+  const pricePerHour = 220;
+  const valueOfGainGood = isNightWork ? 7000 : 17000;
+  const valueOfGainVeryGood = isNightWork ? 12000 : 20000;
 
   const coefficientOfGainGood = gain >= valueOfGainGood ? 1.1 : 1;
   const coefficientOfGainVeryGood =
