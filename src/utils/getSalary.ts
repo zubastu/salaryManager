@@ -8,8 +8,8 @@ export const getSalary = (
 ): TWorkShiftProperties => {
   const { workHours, gain } = data;
   const pricePerHour = 220;
-  const valueOfGainGood = isNightWork ? 7000 : 17000;
-  const valueOfGainVeryGood = isNightWork ? 12000 : 20000;
+  const valueOfGainGood = isNightWork ? 10000 : 17000;
+  const valueOfGainVeryGood = isNightWork ? 13000 : 20000;
 
   const coefficientOfGainGood = gain >= valueOfGainGood ? 1.1 : 1;
   const coefficientOfGainVeryGood =
