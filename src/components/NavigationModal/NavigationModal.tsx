@@ -62,8 +62,9 @@ const NavigationModal: FC = () => {
                     : styles.navigationPopup__link
                 }
               >
-                Добавление рабочей смены
+                Смены
               </NavLink>
+
               <NavLink
                 onClick={handleCloseModal}
                 to={routes.salary}
@@ -73,8 +74,9 @@ const NavigationModal: FC = () => {
                     : styles.navigationPopup__link
                 }
               >
-                Расчет зарплаты
+                Зарплата
               </NavLink>
+
               <NavLink
                 onClick={handleCloseModal}
                 to={routes.employeeSettings}
@@ -84,7 +86,31 @@ const NavigationModal: FC = () => {
                     : styles.navigationPopup__link
                 }
               >
-                Параметры сотрудника
+                Сотрудники
+              </NavLink>
+
+              <NavLink
+                onClick={handleCloseModal}
+                to={routes.countCase}
+                className={
+                  location.pathname.includes(routes.countCase)
+                    ? `${styles.navigationPopup__link} ${styles.navigationPopup__link_type_active}`
+                    : styles.navigationPopup__link
+                }
+              >
+                Касса
+              </NavLink>
+
+              <NavLink
+                onClick={handleCloseModal}
+                to={routes.coefficients}
+                className={
+                  location.pathname.includes(routes.coefficients)
+                    ? `${styles.navigationPopup__link} ${styles.navigationPopup__link_type_active}`
+                    : styles.navigationPopup__link
+                }
+              >
+                Коэфф.
               </NavLink>
             </>
           )}
