@@ -12,7 +12,7 @@ const NavigationLinks = () => {
             isActive ? styles.linkActive : styles.link
           }
         >
-          Добавление рабочей смены
+          Смены
         </NavLink>
       </li>
 
@@ -23,7 +23,7 @@ const NavigationLinks = () => {
             isActive ? styles.linkActive : styles.link
           }
         >
-          Расчет зарплаты
+          Зарплата
         </NavLink>
       </li>
 
@@ -34,7 +34,29 @@ const NavigationLinks = () => {
             isActive ? styles.linkActive : styles.link
           }
         >
-          Параметры сотрудника
+          Сотрудники
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
+          to={routes.countCase}
+          className={({ isActive }) =>
+            isActive ? styles.linkActive : styles.link
+          }
+        >
+          Касса
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
+          to={routes.employeeSettings}
+          className={({ isActive }) =>
+            isActive ? styles.linkActive : styles.link
+          }
+        >
+          Коэфф.
         </NavLink>
       </li>
     </ul>

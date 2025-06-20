@@ -7,7 +7,7 @@ import Login from "./pages/Login/Login.tsx";
 import EmployeeSettings from "./pages/EmployeeSettings/EmployeeSettings.tsx";
 import CountSalary from "./pages/CountSalary/CountSalary.tsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.tsx";
-import NavigationPopup from "./components/NavigationModal/NavigationPopup.tsx";
+import NavigationModal from "./components/NavigationModal/NavigationModal.tsx";
 import CountCase from "./pages/CountCase/CountCase.tsx";
 import NotifyService from "./components/NotifyService/NotifyService.tsx";
 import ConfirmDeleteEmployeeModal from "./components/ConfirmDeleteEmployeeModal/ConfirmDeleteEmployeeModal.tsx";
@@ -53,7 +53,7 @@ function App() {
             path={"*"}
           />
         </Routes>
-        <NavigationPopup />
+        <NavigationModal />
         <NotifyService />
         <ConfirmDeleteEmployeeModal />
         <ConfirmDeleteWorkShiftModal />

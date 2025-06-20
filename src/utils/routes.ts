@@ -4,4 +4,5 @@ export const routes = {
   employeeSettings: "/employee-settings",
   countCase: "/count-case",
   login: "/login",
+  coefficients: "/coefficients",
 };
