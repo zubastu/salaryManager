@@ -6,6 +6,13 @@
   border: 1px solid $color-palette-white;
   padding: 5px;
   gap: 10px;
+  flex-wrap: wrap;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .incorrect {
