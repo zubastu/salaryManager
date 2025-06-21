@@ -10,6 +10,7 @@ import { confirmDeleteWorkShiftModalSlice } from "./confirmDeleteWorkShiftModalS
 import { confirmDeleteEmployeeModalSlice } from "./confirmDeleteEmployeeModalSlice/confirmDeleteEmployeeModalSlice.ts";
 import { updateWorkShiftModalSlice } from "./updateWorkShiftModalSlice/updateWorkShiftModalSlice.ts";
 import { coefficientsApi } from "./coefficients/coeficients.api.ts";
+import { updateCoefficientsModalSlice } from "./updateCoefficientsModalSlice/updateCoefficientsModalSlice.ts";
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     confirmDeleteWorkShiftModal: confirmDeleteWorkShiftModalSlice.reducer,
     confirmDeleteEmployeeModal: confirmDeleteEmployeeModalSlice.reducer,
     updateWorkShiftModal: updateWorkShiftModalSlice.reducer,
+    updateCoefficientsModal: updateCoefficientsModalSlice.reducer,
     [employeesApi.reducerPath]: employeesApi.reducer,
     [workShiftsApi.reducerPath]: workShiftsApi.reducer,
     [authApi.reducerPath]: authApi.reducer,

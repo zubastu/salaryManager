@@ -4,8 +4,8 @@
 .container {
   display: flex;
   border: 1px solid $color-palette-white;
-  padding: 10px;
-  border-radius: 3px;
+  padding: 5px;
+  gap: 10px;
 }
 
 .incorrect {

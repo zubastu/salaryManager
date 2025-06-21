@@ -16,10 +16,10 @@ const CountCaseItem: FC<TCountCaseItemProps> = ({ item }) => {
       </p>
       <p>Расчет: {item.resultCashInCase}</p>
       <p className={isCorrectValue ? "" : styles.incorrect}>
-        Фактически: {item.factInCase}
+        Факт.: {item.factInCase}
       </p>
       <p className={isCorrectValue ? "" : styles.incorrect}>
-        Сотрудник: {item.employee}
+        Сотр.: {item.employee}
       </p>
     </li>
   );

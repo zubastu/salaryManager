@@ -11,6 +11,8 @@ import { dayHours, nightHours } from "../../utils/constants.ts";
 import { countHelper } from "../../utils/countHelper.ts";
 import CountCaseItem from "../../components/CountCaseItem/CountCaseItem.tsx";
 import { sortCallback } from "../../utils/sortHelper.ts";
+import { showNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
+import { useAppDispatch } from "../../hooks/store.ts";
 
 const CountCase = () => {
   const [getWorkShifts, { data: workShiftsData }] =
@@ -20,8 +22,13 @@ const CountCase = () => {
     to: "",
   });
 
+  const dispatch = useAppDispatch();
+
   const [result, setResult] = useState<TCountCaseItem[]>([]);
   const handleSubmit: SubmitHandler<TDateForm> = (data) => {
+    if (data.from === "" || data.to === "") {
+      dispatch(showNotify("Необходимо выбрать даты"));
+    }
     getWorkShifts({
       startDate: data.from + dayHours,
       endDate: data.to + nightHours,
@@ -40,7 +47,7 @@ const CountCase = () => {
 
   return (
     <section className={styles.container}>
-      <FormGroup onSubmit={handleSubmit}>
+      <FormGroup onSubmit={handleSubmit} style={styles.form}>
         <Input name="from" placeholder="С даты" type="date" />
         <Input name="to" placeholder="По дату" type="date" />
         <Button label="Расчитать" />

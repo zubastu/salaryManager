@@ -13,6 +13,7 @@ import { showNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts
 import { getSalary } from "../../utils/getSalary.ts";
 import { resetEmployee } from "../../store/employeeSelectionSlice/employeeSelectionSlice.ts";
 import { closeUpdateWorkShiftModal } from "../../store/updateWorkShiftModalSlice/updateWorkShiftModalSlice.ts";
+import { useGetCoefficientsQuery } from "../../store/coefficients/coeficients.api.ts";
 
 const UpdateWorkShiftForm = () => {
   const { selectedWorkShift } = useAppSelector(
@@ -28,16 +29,23 @@ const UpdateWorkShiftForm = () => {
   ] = useUpdateWorkShiftMutation();
   const { data: user } = useGetUserDataQuery();
 
+  const { data: coefficientsData } = useGetCoefficientsQuery();
+
   const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<TForm> = async (data) => {
-    if (user) {
+    if (user && coefficientsData && coefficientsData.pricePerHour) {
       const employee = {
         id: selectedWorkShift.user.id,
         name: selectedWorkShift.user.name,
       };
 
-      const workShift = getSalary(data, isNightWork, employee);
+      const workShift = getSalary(
+        data,
+        isNightWork,
+        employee,
+        coefficientsData,
+      );
       await updateWorkShift({
         data: workShift,
         workShiftId: selectedWorkShift.id,

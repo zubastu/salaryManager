@@ -51,23 +51,12 @@ const NavigationLinks = () => {
 
       <li>
         <NavLink
-          to={routes.employeeSettings}
+          to={routes.coefficients}
           className={({ isActive }) =>
             isActive ? styles.linkActive : styles.link
           }
         >
           Коэфф.
-        </NavLink>
-      </li>
-
-      <li>
-        <NavLink
-          to={routes.countCase}
-          className={({ isActive }) =>
-            isActive ? styles.linkActive : styles.link
-          }
-        >
-          Подсчет кассы
         </NavLink>
       </li>
     </ul>

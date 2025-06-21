@@ -1,0 +1,14 @@
+@use '../../assets/styles/variables';
+@use '../../assets/styles/mixins';
+
+
+.container {
+  max-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 320px;
+  padding: 10px;
+}

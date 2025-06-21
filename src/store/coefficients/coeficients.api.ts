@@ -7,6 +7,7 @@ import {
 
 import { getHeaders } from "../employees/employees.api.ts";
 import { BASE_URL } from "../../utils/constants.ts";
+import { TCoefficient } from "../../types";
 
 const headers: HeadersInit = {
   "Content-Type": "application/json",
@@ -19,17 +20,6 @@ type TCustomError = {
     message: string;
   };
   status: number;
-};
-
-type TCoefficient = {
-  pricePerHour: number;
-  valueOfGainGoodDay: number;
-  valueOfGainGoodNight: number;
-  valueOfGainVeryGoodDay: number;
-  valueOfGainVeryGoodNight: number;
-  coefficientOfGainGood: number;
-  coefficientOfGainVeryGood: number;
-  id: number;
 };
 
 export const coefficientsApi = createApi({
@@ -56,6 +46,7 @@ export const coefficientsApi = createApi({
       providesTags: () => ["Coefficient"],
     }),
   }),
+  refetchOnFocus: true,
 });
 
 export const { useGetCoefficientsQuery, useUpdateCoefficientsMutation } =
