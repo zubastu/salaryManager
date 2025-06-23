@@ -10,7 +10,6 @@ import { TDateForm } from "../CountSalary/CountSalary.tsx";
 import { dayHours, nightHours } from "../../utils/constants.ts";
 import { countHelper } from "../../utils/countHelper.ts";
 import CountCaseItem from "../../components/CountCaseItem/CountCaseItem.tsx";
-import { sortCallback } from "../../utils/sortHelper.ts";
 import { showNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
 import { useAppDispatch } from "../../hooks/store.ts";
 
@@ -41,7 +40,7 @@ const CountCase = () => {
 
   useEffect(() => {
     if (workShiftsData && workShiftsData.length) {
-      setResult(countHelper([...workShiftsData].sort(sortCallback)));
+      setResult(countHelper([...workShiftsData]));
     }
   }, [workShiftsData]);
 

@@ -1,20 +1,25 @@
 import { TCountCaseItem, TWorkShift } from "../types";
 
 export const countHelper = (data: TWorkShift[]): TCountCaseItem[] => {
-  const result: any = [];
+  if (!data || data.length === 0) return [];
 
-  data.reduce((firstShift, secondShift) => {
+  const result: any = [];
+  const newData = [...data].reverse();
+
+  for (let i = 0; i < newData.length - 1; i++) {
+    const current = newData[i];
+    const next = newData[i + 1];
+
     result.push({
-      id: secondShift.id,
-      date: new Date(secondShift.date).toLocaleDateString(),
-      employee: secondShift.user.name,
+      id: current.id,
+      date: `на ${new Date(next.date).toLocaleDateString()}`,
+      employee: next.user.name,
       resultCashInCase:
-        firstShift.cash_in_case! + secondShift.cash - secondShift.costs!,
-      factInCase: secondShift.cash_in_case,
-      isNightShift: secondShift.isNightShift,
+        (current.cash_in_case ?? 0) + (next.cash ?? 0) - (next.costs ?? 0),
+      factInCase: next.cash_in_case,
+      isNightShift: next.isNightShift,
     });
-    return secondShift;
-  });
+  }
 
   return result;
 };

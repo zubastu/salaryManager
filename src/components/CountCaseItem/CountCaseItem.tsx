@@ -9,12 +9,16 @@ type TCountCaseItemProps = {
 const CountCaseItem: FC<TCountCaseItemProps> = ({ item }) => {
   const date = item.date.slice(0, 10);
   const isCorrectValue = item.factInCase >= item.resultCashInCase;
-
+  console.log(
+    item.factInCase >= item.resultCashInCase,
+    item.factInCase,
+    item.resultCashInCase,
+  );
   return (
     <li className={styles.container}>
       <p className={styles.item}>
-        Дата:
-        <p>{String(date)}</p>
+        Проверка:
+        <p>{String(date).slice(0, 8)}</p>
       </p>
 
       <p className={styles.item}>
