@@ -46,10 +46,6 @@ const Login = () => {
     login(data);
   };
 
-  const handleAdminSignin = () => {
-    login({ username: "administrator", password: "salary3452" });
-  };
-
   return (
     <section className={styles.container}>
       <FormGroup onSubmit={handleSubmit}>
@@ -67,13 +63,6 @@ const Login = () => {
         />
         <Button label="Войти" />
       </FormGroup>
-
-      <p className={styles.protfolio}>Версия для портфолио</p>
-      <Button
-        type="button"
-        label="Войти как Администратор"
-        onClick={handleAdminSignin}
-      />
     </section>
   );
 };
