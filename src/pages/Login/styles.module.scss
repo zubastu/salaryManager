@@ -3,6 +3,16 @@
 
 
 .container {
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.info {
+  width: 100%;
+  text-align: center;
 }
 
 .link {
