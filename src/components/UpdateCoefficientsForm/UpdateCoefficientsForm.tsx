@@ -15,7 +15,8 @@ import {
 import { closeUpdateCoefficientsModal } from "../../store/updateCoefficientsModalSlice/updateCoefficientsModalSlice.ts";
 
 const UpdateCoefficientsForm = () => {
-  const { data: coefficientsData } = useGetCoefficientsQuery();
+  const { data: coefficientsData, isSuccess: hasCoefficientsResponseSuccess } =
+    useGetCoefficientsQuery();
   const [postCoefficients, { isSuccess, isError }] =
     useUpdateCoefficientsMutation();
 
@@ -28,7 +29,7 @@ const UpdateCoefficientsForm = () => {
       dispatch(showNotify("Нужно ввести 'обновить'"));
       return;
     }
-    if (coefficientsData && coefficientsData.pricePerHour) {
+    if (hasCoefficientsResponseSuccess) {
       data.id = coefficientsData.id;
       data.coefficientOfGainGood = parseFloat(
         String(data.coefficientOfGainGood),
