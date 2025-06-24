@@ -11,7 +11,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   validation?: RegisterOptions;
   onBlur?: () => void;
   disabled?: boolean;
-  placeholder: string;
+  placeholder?: string;
 }
 
 const Input: FC<InputProps> = ({

@@ -1,23 +1,40 @@
-import { TEmployeeListItem, TForm, TWorkShiftProperties } from "../types";
+import {
+  TCoefficient,
+  TEmployeeListItem,
+  TForm,
+  TWorkShiftProperties,
+} from "../types";
 import { nightHours, dayHours } from "./constants.ts";
 
 export const getSalary = (
   data: TForm,
   isNightWork: boolean,
   selectedEmployee: TEmployeeListItem,
+  coefficientsData: TCoefficient,
 ): TWorkShiftProperties => {
   const { workHours, gain } = data;
-  const pricePerHour = 220;
-  const valueOfGainGood = isNightWork ? 10000 : 17000;
-  const valueOfGainVeryGood = isNightWork ? 13000 : 20000;
+  const {
+    pricePerHour,
+    valueOfGainGoodDay,
+    valueOfGainVeryGoodDay,
+    valueOfGainGoodNight,
+    valueOfGainVeryGoodNight,
+    coefficientOfGainVeryGood,
+    coefficientOfGainGood,
+  } = coefficientsData;
 
-  const coefficientOfGainGood = gain >= valueOfGainGood ? 1.1 : 1;
-  const coefficientOfGainVeryGood =
-    gain >= valueOfGainVeryGood ? 1.2 : coefficientOfGainGood;
+  const valueOfGainGood = isNightWork
+    ? valueOfGainGoodNight
+    : valueOfGainGoodDay;
+  const valueOfGainVeryGood = isNightWork
+    ? valueOfGainVeryGoodNight
+    : valueOfGainVeryGoodDay;
 
-  const salary = Math.floor(
-    workHours * (pricePerHour * coefficientOfGainVeryGood),
-  );
+  const countGoodGain = gain >= valueOfGainGood ? coefficientOfGainGood : 1;
+  const countVeryGoodGain =
+    gain >= valueOfGainVeryGood ? coefficientOfGainVeryGood : countGoodGain;
+
+  const salary = Math.floor(workHours * (pricePerHour * countVeryGoodGain));
 
   return {
     ...data,

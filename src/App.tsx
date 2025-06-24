@@ -7,12 +7,14 @@ import Login from "./pages/Login/Login.tsx";
 import EmployeeSettings from "./pages/EmployeeSettings/EmployeeSettings.tsx";
 import CountSalary from "./pages/CountSalary/CountSalary.tsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.tsx";
-import NavigationPopup from "./components/NavigationModal/NavigationPopup.tsx";
+import NavigationModal from "./components/NavigationModal/NavigationModal.tsx";
 import CountCase from "./pages/CountCase/CountCase.tsx";
 import NotifyService from "./components/NotifyService/NotifyService.tsx";
 import ConfirmDeleteEmployeeModal from "./components/ConfirmDeleteEmployeeModal/ConfirmDeleteEmployeeModal.tsx";
 import ConfirmDeleteWorkShiftModal from "./components/ConfirmDeleteWorkShiftModal/ConfirmDeleteWorkShiftModal.tsx";
 import UpdateWorkShiftModal from "./components/UpdateWorkShiftModal/UpdateWorkShiftModal.tsx";
+import Coefficients from "./pages/Coefficients/Coefficients.tsx";
+import UpdateCoefficientsModal from "./components/UpdateCoefficientsModal/UpdateCoefficientsModal.tsx";
 
 function App() {
   const location = useLocation();
@@ -53,17 +55,24 @@ function App() {
             }
             path={routes.countCase}
           />
+          <Route
+            element={
+              <ProtectedRoute element={<Coefficients />} adminOnly={true} />
+            }
+            path={routes.coefficients}
+          />
           <Route element={<Login />} path={routes.login} />
           <Route
             element={<Navigate to={routes.workShifts} replace={true} />}
             path={"*"}
           />
         </Routes>
-        <NavigationPopup />
+        <NavigationModal />
         <NotifyService />
         <ConfirmDeleteEmployeeModal />
         <ConfirmDeleteWorkShiftModal />
         <UpdateWorkShiftModal />
+        <UpdateCoefficientsModal />
       </main>
     </>
   );

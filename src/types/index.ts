@@ -71,3 +71,14 @@ export type TCountCaseItem = {
   factInCase: number;
   isNightShift: boolean;
 };
+
+export type TCoefficient = {
+  pricePerHour: number;
+  valueOfGainGoodDay: number;
+  valueOfGainGoodNight: number;
+  valueOfGainVeryGoodDay: number;
+  valueOfGainVeryGoodNight: number;
+  coefficientOfGainGood: number;
+  coefficientOfGainVeryGood: number;
+  id: number;
+};

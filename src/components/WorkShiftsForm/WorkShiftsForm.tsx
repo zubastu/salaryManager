@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { usePostWorkShiftMutation } from "../../store/workShifts/workShifts.api.ts";
 import { resetEmployee } from "../../store/employeeSelectionSlice/employeeSelectionSlice.ts";
 import { useGetUserDataQuery } from "../../store/auth/auth.api.ts";
+import { useGetCoefficientsQuery } from "../../store/coefficients/coeficients.api.ts";
 
 const WorkShiftsForm = () => {
   const [isNightWork, setIsNightWork] = useState(false);
@@ -20,7 +21,10 @@ const WorkShiftsForm = () => {
     postWorkShift,
     { isSuccess: successPostWorkShift, isError: errorPostWorkShift },
   ] = usePostWorkShiftMutation();
+
   const { data: user } = useGetUserDataQuery();
+
+  const { data: coefficientsData } = useGetCoefficientsQuery();
 
   const dispatch = useAppDispatch();
 
@@ -33,9 +37,14 @@ const WorkShiftsForm = () => {
       dispatch(showNotify("Нужно выбрать сотрудника"));
       return;
     }
-    if (user) {
+    if (user && coefficientsData && coefficientsData.pricePerHour) {
       const employee = user?.role_id === 1 ? selectedEmployee : user;
-      const workShift = getSalary(data, isNightWork, employee);
+      const workShift = getSalary(
+        data,
+        isNightWork,
+        employee,
+        coefficientsData,
+      );
       await postWorkShift(workShift);
     }
   };
@@ -56,6 +65,7 @@ const WorkShiftsForm = () => {
 
   const handleChange = () => {
     setIsNightWork((prevState) => !prevState);
+    console.log(coefficientsData);
   };
 
   return (

@@ -9,17 +9,33 @@ type TCountCaseItemProps = {
 const CountCaseItem: FC<TCountCaseItemProps> = ({ item }) => {
   const date = item.date.slice(0, 10);
   const isCorrectValue = item.factInCase >= item.resultCashInCase;
+  console.log(
+    item.factInCase >= item.resultCashInCase,
+    item.factInCase,
+    item.resultCashInCase,
+  );
   return (
     <li className={styles.container}>
-      <p>
-        Дата: {String(date)} {item.isNightShift ? "Ночная" : "Дневная"}
+      <p className={styles.item}>
+        Проверка:
+        <p>{String(date).slice(0, 8)}</p>
       </p>
-      <p>Расчет: {item.resultCashInCase}</p>
-      <p className={isCorrectValue ? "" : styles.incorrect}>
-        Фактически: {item.factInCase}
+
+      <p className={styles.item}>
+        Тип:
+        <p>{item.isNightShift ? "Ночная" : "Дневная"}</p>
       </p>
-      <p className={isCorrectValue ? "" : styles.incorrect}>
-        Сотрудник: {item.employee}
+
+      <p className={styles.item}>
+        Расчет: <p>{item.resultCashInCase}</p>
+      </p>
+
+      <p className={`${styles.item} ${isCorrectValue ? "" : styles.incorrect}`}>
+        Факт.: <p>{item.factInCase}</p>
+      </p>
+
+      <p className={`${styles.item} ${isCorrectValue ? "" : styles.incorrect}`}>
+        Сотр.: <p>{item.employee}</p>
       </p>
     </li>
   );

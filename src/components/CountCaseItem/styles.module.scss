@@ -4,8 +4,17 @@
 .container {
   display: flex;
   border: 1px solid $color-palette-white;
-  padding: 10px;
-  border-radius: 3px;
+  padding: 5px;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 600px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  min-width: 70px;
 }
 
 .incorrect {

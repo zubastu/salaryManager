@@ -6,7 +6,7 @@ import { routes } from "../../utils/routes.ts";
 import { useAppDispatch, useAppSelector } from "../../hooks/store.ts";
 import { closeNavModal } from "../../store/navigationPopupSlice/navigationPopupSlice.ts";
 import { authApi, useGetUserDataQuery } from "../../store/auth/auth.api.ts";
-const NavigationPopup: FC = () => {
+const NavigationModal: FC = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const { data } = useGetUserDataQuery();
@@ -62,8 +62,9 @@ const NavigationPopup: FC = () => {
                     : styles.navigationPopup__link
                 }
               >
-                Добавление рабочей смены
+                Смены
               </NavLink>
+
               <NavLink
                 onClick={handleCloseModal}
                 to={routes.salary}
@@ -73,8 +74,9 @@ const NavigationPopup: FC = () => {
                     : styles.navigationPopup__link
                 }
               >
-                Расчет зарплаты
+                Зарплата
               </NavLink>
+
               <NavLink
                 onClick={handleCloseModal}
                 to={routes.employeeSettings}
@@ -84,7 +86,31 @@ const NavigationPopup: FC = () => {
                     : styles.navigationPopup__link
                 }
               >
-                Параметры сотрудника
+                Сотрудники
+              </NavLink>
+
+              <NavLink
+                onClick={handleCloseModal}
+                to={routes.countCase}
+                className={
+                  location.pathname.includes(routes.countCase)
+                    ? `${styles.navigationPopup__link} ${styles.navigationPopup__link_type_active}`
+                    : styles.navigationPopup__link
+                }
+              >
+                Касса
+              </NavLink>
+
+              <NavLink
+                onClick={handleCloseModal}
+                to={routes.coefficients}
+                className={
+                  location.pathname.includes(routes.coefficients)
+                    ? `${styles.navigationPopup__link} ${styles.navigationPopup__link_type_active}`
+                    : styles.navigationPopup__link
+                }
+              >
+                Коэфф.
               </NavLink>
             </>
           )}
@@ -102,4 +128,4 @@ const NavigationPopup: FC = () => {
   );
 };
 
-export default NavigationPopup;
+export default NavigationModal;
