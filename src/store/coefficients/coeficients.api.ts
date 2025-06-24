@@ -9,12 +9,6 @@ import { getHeaders } from "../employees/employees.api.ts";
 import { BASE_URL } from "../../utils/constants.ts";
 import { TCoefficient } from "../../types";
 
-const headers: HeadersInit = {
-  "Content-Type": "application/json",
-  Accept: "application/json: charset=utf-8",
-  "Access-Control-Allow-Origin": "*",
-};
-
 type TCustomError = {
   data: {
     message: string;
@@ -41,7 +35,7 @@ export const coefficientsApi = createApi({
     getCoefficients: build.query<TCoefficient, void>({
       query: () => ({
         url: "/coefficient",
-        headers,
+        headers: getHeaders(true),
       }),
       providesTags: () => ["Coefficient"],
     }),

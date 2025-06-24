@@ -42,12 +42,17 @@ const CountSalary = () => {
     (store) => store.selectedEmployee,
   );
 
+  const isEmployeeSelected = Boolean(selectedEmployee.id);
+  const isDatesSelected = Boolean(dates.from !== "" && dates.to !== "");
+  const isMobile = width <= 1120;
+
   useEffect(() => {
     dispatch(resetEmployee());
   }, []);
 
   const handleSubmit: SubmitHandler<TDateForm> = async (data) => {
-    if (selectedEmployee.id !== "" && data.from && data.to) {
+    if (isEmployeeSelected && isDatesSelected) {
+      console.log(isEmployeeSelected && isDatesSelected);
       dispatch(workShiftsApi.util?.invalidateTags(["WorkShiftsEmployee"]));
       await getShifts({
         user_id: selectedEmployee.id,
@@ -67,8 +72,6 @@ const CountSalary = () => {
   useEffect(() => {
     workShiftsResponseSuccess && setWorkShifts(workShiftsResponse);
   }, [workShiftsResponse, workShiftsResponseSuccess]);
-
-  const isMobile = width <= 1120;
 
   useEffect(() => {
     if (workShifts) {
@@ -116,16 +119,20 @@ const CountSalary = () => {
       )}
       {!isMobile && (
         <div className={styles.resultContainer}>
-          <div className={styles.salaryContainer}>
-            <h3 className={styles.heading}>
-              Сотрудник: {selectedEmployee.name}
-            </h3>
-            <p>
-              Период: с {dates.from} по {dates.to}
-            </p>
-            <p>Часов отработал: {workHours}</p>
-            <p>Заработал: {salary} р</p>
-          </div>
+          {isEmployeeSelected && isDatesSelected ? (
+            <div className={styles.salaryContainer}>
+              <h3 className={styles.heading}>
+                Сотрудник: {selectedEmployee.name}
+              </h3>
+              <p>
+                Период: с {dates.from} по {dates.to}
+              </p>
+              <p>Часов отработал: {workHours}</p>
+              <p>Заработал: {salary} р</p>
+            </div>
+          ) : (
+            <h3>Необходимо выбрать сотрудника и даты</h3>
+          )}
           {workShifts && (
             <WorkShiftsHistory data={workShifts} title="Смены в расчете" />
           )}
