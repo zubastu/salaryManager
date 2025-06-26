@@ -16,6 +16,7 @@ import { TWorkShift } from "../../types";
 import useWindowDimensions from "../../hooks/resize.ts";
 import { Tab } from "../../components/Tab/Tab.tsx";
 import { showNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
+import { getCurrentMonthDates } from "../../utils/datesHelper.ts";
 
 export type TDateForm = {
   from: string;
@@ -23,6 +24,7 @@ export type TDateForm = {
 };
 
 const CountSalary = () => {
+  const { first, fifteenth, sixteenth, last } = getCurrentMonthDates();
   const [
     getShifts,
     { data: workShiftsResponse, isSuccess: workShiftsResponseSuccess },
@@ -30,10 +32,8 @@ const CountSalary = () => {
   const [workShifts, setWorkShifts] = useState<TWorkShift[]>([]);
   const [salary, setSalary] = useState(0);
   const [workHours, setWorkHours] = useState(0);
-  const [dates, setDates] = useState<{ from: string; to: string }>({
-    from: "",
-    to: "",
-  });
+  const [from, setFrom] = useState<string>(first);
+  const [to, setTo] = useState<string>(last);
   const [tabValue, setTabValue] = useState<"form" | "result">("form");
   const dispatch = useAppDispatch();
   const { width } = useWindowDimensions();
@@ -43,29 +43,25 @@ const CountSalary = () => {
   );
 
   const isEmployeeSelected = Boolean(selectedEmployee.id);
-  const isDatesSelected = Boolean(dates.from !== "" && dates.to !== "");
+  const isDatesSelected = Boolean(from !== "" || to !== "");
   const isMobile = width <= 1120;
 
   useEffect(() => {
     dispatch(resetEmployee());
   }, []);
 
-  const handleSubmit: SubmitHandler<TDateForm> = async (data) => {
-    if (isEmployeeSelected && isDatesSelected) {
-      console.log(isEmployeeSelected && isDatesSelected);
+  const handleSubmit: SubmitHandler<TDateForm> = async () => {
+    if (isEmployeeSelected) {
       dispatch(workShiftsApi.util?.invalidateTags(["WorkShiftsEmployee"]));
       await getShifts({
         user_id: selectedEmployee.id,
-        startDate: data.from + " 00:59:59:0000",
-        endDate: data.to + " 23:59:59:0000",
+        startDate: from + " 00:59:59:0000",
+        endDate: to + " 23:59:59:0000",
       });
-      setDates({
-        from: data.from,
-        to: data.to,
-      });
+
       isMobile && setTabValue("result");
     } else {
-      dispatch(showNotify("Необходимо выбрать даты и сотрудника"));
+      dispatch(showNotify("Необходимо выбрать сотрудника"));
     }
   };
 
@@ -86,6 +82,15 @@ const CountSalary = () => {
       setWorkHours(totalWorkHours);
     }
   }, [workShifts]);
+
+  const setFirstFifteen = () => {
+    setFrom(first);
+    setTo(fifteenth);
+  };
+  const setSixteenLast = () => {
+    setFrom(sixteenth);
+    setTo(last);
+  };
 
   return (
     <section className={styles.container}>
@@ -111,8 +116,22 @@ const CountSalary = () => {
         <div className={styles.formContainer}>
           <EmployeesList />
           <FormGroup onSubmit={handleSubmit}>
-            <Input name="from" placeholder="С даты" type="date" />
-            <Input name="to" placeholder="По дату" type="date" />
+            <Input
+              name="from"
+              placeholder="С даты"
+              type="date"
+              value={from}
+              onChange={(e) => setFrom(e.target.value)}
+            />
+            <Input
+              name="to"
+              placeholder="По дату"
+              type="date"
+              value={to}
+              onChange={(e) => setTo(e.target.value)}
+            />
+            <Button onClick={setFirstFifteen} label="c 1 по 15 число" />
+            <Button onClick={setSixteenLast} label="с 16 до конца месяца" />
             <Button label="Расчитать" />
           </FormGroup>
         </div>
@@ -125,7 +144,7 @@ const CountSalary = () => {
                 Сотрудник: {selectedEmployee.name}
               </h3>
               <p>
-                Период: с {dates.from} по {dates.to}
+                Период: с {from} по {to}
               </p>
               <p>Часов отработал: {workHours}</p>
               <p>Заработал: {salary} р</p>
@@ -142,8 +161,22 @@ const CountSalary = () => {
         <div className={styles.formContainer}>
           <EmployeesList />
           <FormGroup onSubmit={handleSubmit}>
-            <Input name="from" placeholder="С даты" type="date" />
-            <Input name="to" placeholder="По дату" type="date" />
+            <Input
+              name="from"
+              placeholder="С даты"
+              type="date"
+              value={from}
+              onChange={(e) => setFrom(e.target.value)}
+            />
+            <Input
+              name="to"
+              placeholder="По дату"
+              type="date"
+              value={to}
+              onChange={(e) => setTo(e.target.value)}
+            />
+            <Button onClick={setFirstFifteen} label="c 1 по 15 число" />
+            <Button onClick={setSixteenLast} label="с 16 до конца месяца" />
             <Button label="Расчитать" />
           </FormGroup>
         </div>
@@ -156,7 +189,7 @@ const CountSalary = () => {
               Сотрудник: {selectedEmployee.name}
             </h3>
             <p>
-              Период: с {dates.from} по {dates.to}
+              Период: с {from} по {to}
             </p>
             <p>Часов отработал: {workHours}</p>
             <p>Заработал: {salary} р</p>
