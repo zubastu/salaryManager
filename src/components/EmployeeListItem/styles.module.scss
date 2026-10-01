@@ -19,3 +19,7 @@
 .employeeItem:hover { border-color: #bfdbfe; background: #f8fbff; }
 .employeeItemSelected { border-color: #93c5fd; background: #eff6ff; color: #1d4ed8; box-shadow: inset 3px 0 0 #2563eb; }
 .employeeItem:active, .employeeItemSelected:active { transform: scale(.99); }
+
+@media (min-width: 761px) {
+  .employeeItem, .employeeItemSelected { min-height: 38px; padding: 0 10px; font-size: 13px; }
+}

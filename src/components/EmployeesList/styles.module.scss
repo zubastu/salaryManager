@@ -9,12 +9,11 @@
 }
 .heading { font-size: 13px; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
 .employeeList {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 6px;
   max-height: none;
   overflow: visible;
-  padding-right: 2px;
-  scrollbar-width: thin;
+  padding-right: 0;
 }
 @media (max-width: 760px) { .container { max-width: none; } }
