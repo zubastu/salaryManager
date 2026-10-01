@@ -109,7 +109,7 @@ const EmployeeSettings = () => {
       </div>
 
       <div className={styles.forms}>
-        <EmployeesList />
+        <EmployeesList fillAvailable />
         {tab === Tabs.add && (
           <div className={styles.createFormContainer}>
             <h3 className={styles.heading}>Добавить сотрудника</h3>

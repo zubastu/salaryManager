@@ -7,6 +7,9 @@
   flex-direction: column;
   gap: 10px;
 }
+.fillAvailable {
+  min-height: 0;
+}
 .heading { font-size: 13px; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
 .employeeList {
   display: grid;
@@ -24,4 +27,9 @@
 @media (max-width: 760px) {
   .container { max-width: none; }
   .employeeList { max-height: clamp(120px, 21dvh, 180px); }
+}
+
+@media (min-width: 761px) {
+  .fillAvailable { height: 100%; max-width: none; }
+  .fillAvailable .employeeList { flex: 1; max-height: none; }
 }
