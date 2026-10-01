@@ -4,5 +4,5 @@
 .formWrapper { min-width: 0; display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #fff; border: 1px solid variables.$color-palette-border; border-radius: variables.$radius-lg; box-shadow: variables.$shadow-soft; }
 .formWrapper::before { content: 'Новая смена'; font-size: 18px; font-weight: 780; letter-spacing: -.03em; }
 .tabs { display: flex; gap: 6px; padding: 4px; border-radius: 12px; background: #f8fafc; }
-@media (max-width: 1180px) { .container { height: auto; grid-template-columns: 1fr; align-items: start; } .formWrapper { max-width: 760px; width: 100%; margin: 0 auto; } }
+@media (max-width: 1180px) { .container { height: auto; min-height: calc(100dvh - 96px); grid-template-columns: 1fr; align-items: stretch; } .formWrapper { max-width: none; width: 100%; min-height: 100%; margin: 0; } }
 @media (max-width: 760px) { .container { gap: 12px; } .formWrapper { padding: 15px; border-radius: 15px; } .formWrapper::before { font-size: 18px; } }

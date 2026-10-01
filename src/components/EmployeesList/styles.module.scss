@@ -12,8 +12,16 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 6px;
-  max-height: none;
-  overflow: visible;
-  padding-right: 0;
+  max-height: clamp(150px, 28dvh, 250px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 6px;
+  border: 1px solid variables.$color-palette-border;
+  border-radius: 12px;
+  background: #f8fafc;
+  scrollbar-width: thin;
 }
-@media (max-width: 760px) { .container { max-width: none; } }
+@media (max-width: 760px) {
+  .container { max-width: none; }
+  .employeeList { max-height: clamp(120px, 21dvh, 180px); }
+}
