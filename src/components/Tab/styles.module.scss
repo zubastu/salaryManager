@@ -12,5 +12,11 @@
   border: 1px solid variables.$color-palette-border !important;
   transform: none !important;
   filter: none !important;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease !important;
 }
-.tabActive { background: #eff6ff !important; border-color: #bfdbfe !important; color: #2563eb !important; }
+.tab:hover { background: #fff !important; border-color: #dbeafe !important; }
+.tabActive { background: #eff6ff !important; border-color: #bfdbfe !important; color: #2563eb !important; box-shadow: inset 0 0 0 1px rgba(37, 99, 235, .04) !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tab, .tabActive { transition-duration: .01ms !important; }
+}

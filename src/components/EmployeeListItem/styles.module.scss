@@ -13,12 +13,16 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background .15s ease, border-color .15s ease, color .15s ease, transform .15s ease;
+  transition: background .18s ease, border-color .18s ease, color .18s ease, transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .18s ease;
   -webkit-tap-highlight-color: transparent;
 }
-.employeeItem:hover { border-color: #bfdbfe; background: #f8fbff; }
+.employeeItem:hover { border-color: #bfdbfe; background: #f8fbff; box-shadow: 0 4px 12px rgba(37, 99, 235, .08); transform: translateY(-1px); }
 .employeeItemSelected { border-color: #93c5fd; background: #eff6ff; color: #1d4ed8; box-shadow: inset 3px 0 0 #2563eb; }
 .employeeItem:active, .employeeItemSelected:active { transform: scale(.99); }
+
+@media (prefers-reduced-motion: reduce) {
+  .employeeItem, .employeeItemSelected { transition-duration: .01ms; }
+}
 
 @media (min-width: 761px) {
   .employeeItem, .employeeItemSelected { min-height: 38px; padding: 0 10px; font-size: 13px; }

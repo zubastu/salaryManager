@@ -2,7 +2,7 @@ import styles from "./styles.module.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/store.ts";
 import { CSSTransition } from "react-transition-group";
 import { useCallback, useEffect, useRef } from "react";
-import { hideNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
+import { clearNotify, hideNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
 
 const NotifyService = () => {
   const { isOpen, message } = useAppSelector((store) => store.notifyService);
@@ -11,6 +11,10 @@ const NotifyService = () => {
 
   const handleClose = useCallback(() => {
     dispatch(hideNotify());
+  }, [dispatch]);
+
+  const handleExited = useCallback(() => {
+    dispatch(clearNotify());
   }, [dispatch]);
 
   useEffect(() => {
@@ -25,14 +29,16 @@ const NotifyService = () => {
   return (
     <CSSTransition
       nodeRef={nodeRef}
-      timeout={220}
+      timeout={260}
       in={isOpen}
       unmountOnExit
+      onExited={handleExited}
       classNames={{
         enter: styles.enter,
         enterActive: styles.enterActive,
         exit: styles.exit,
         exitActive: styles.exitActive,
+        exitDone: styles.exitDone,
       }}
     >
       <section ref={nodeRef} className={styles.container} onClick={handleClose}>

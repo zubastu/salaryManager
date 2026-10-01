@@ -22,7 +22,11 @@ export const notifyServiceSlice = createSlice({
     hideNotify(state) {
       state.isOpen = false;
     },
+
+    clearNotify(state) {
+      if (!state.isOpen) state.message = "";
+    },
   },
 });
 
-export const { showNotify, hideNotify } = notifyServiceSlice.actions;
+export const { showNotify, hideNotify, clearNotify } = notifyServiceSlice.actions;
