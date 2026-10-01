@@ -25,11 +25,14 @@ const NotifyService = () => {
   return (
     <CSSTransition
       nodeRef={nodeRef}
-      timeout={2500}
+      timeout={220}
       in={isOpen}
       unmountOnExit
       classNames={{
         enter: styles.enter,
+        enterActive: styles.enterActive,
+        exit: styles.exit,
+        exitActive: styles.exitActive,
       }}
     >
       <section ref={nodeRef} className={styles.container} onClick={handleClose}>

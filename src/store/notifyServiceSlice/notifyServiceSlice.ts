@@ -21,7 +21,6 @@ export const notifyServiceSlice = createSlice({
 
     hideNotify(state) {
       state.isOpen = false;
-      state.message = "";
     },
   },
 });
