@@ -8,21 +8,18 @@
 }
 
 html {
+  height: 100%;
   min-height: 100%;
   background: variables.$color-palette-black;
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
 
-body,
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100dvh;
-}
-
 body {
-  overflow-x: hidden;
+  height: 100dvh;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
   font-family: variables.$font-roboto;
   background:
     radial-gradient(circle at 0 0, rgba(37, 99, 235, .055), transparent 32rem),
@@ -31,6 +28,13 @@ body {
   color: variables.$color-palette-white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
 }
 
 ::selection {

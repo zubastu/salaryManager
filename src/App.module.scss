@@ -1,9 +1,10 @@
 @use './assets/styles/variables';
 
 .main {
-  flex: 1 0 auto;
+  flex: 1 1 0%;
   width: 100%;
   min-height: 0;
+  overflow-y: auto;
   padding: 14px clamp(12px, 2vw, 26px) 24px;
 }
 
