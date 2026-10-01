@@ -1,97 +1,37 @@
 import styles from "./styles.module.scss";
 import { FC } from "react";
 import { TWorkShift } from "../../types";
-
 import Button from "../Button/Button.tsx";
 import { useGetUserDataQuery } from "../../store/auth/auth.api.ts";
 import { useAppDispatch } from "../../hooks/store.ts";
 import { openConfirmModalShift } from "../../store/confirmDeleteWorkShiftModalSlice/confirmDeleteWorkShiftModalSlice.ts";
 import { openUpdateWorkShiftModal } from "../../store/updateWorkShiftModalSlice/updateWorkShiftModalSlice.ts";
 
-type TWorkShiftHistoryItem = {
-  workShift: TWorkShift;
-};
+type TWorkShiftHistoryItem = { workShift: TWorkShift };
+
 const WorkShiftHistoryItem: FC<TWorkShiftHistoryItem> = ({ workShift }) => {
   const { data: user } = useGetUserDataQuery();
   const dispatch = useAppDispatch();
 
-  const handleOpenUpdateModal = () => {
-    dispatch(openUpdateWorkShiftModal(workShift));
-  };
-  const handleOpenDeleteModal = () => {
-    dispatch(openConfirmModalShift(workShift.id));
-  };
+  const date = new Date(workShift.date).toLocaleDateString("ru-RU");
 
   return (
     <li className={styles.container}>
       <div className={styles.listItem}>
-        <div className={styles.wrapper}>
-          <p className={styles.listItemPropName}>Имя:</p>
-          <p className={styles.listItemPropValue}>{workShift.user.name}</p>
-        </div>
-
-        <div className={styles.wrapper}>
-          <p className={styles.listItemPropName}>Часы работы:</p>
-          <p className={styles.listItemPropValue}>{workShift.workHours}</p>
-        </div>
-
-        <div className={styles.wrapper}>
-          <p className={styles.listItemPropName}>Выручка:</p>
-          <p className={styles.listItemPropValue}>{workShift.gain}</p>
-        </div>
-
-        <div className={styles.wrapper}>
-          <p className={styles.listItemPropName}>ЗП за смену:</p>
-          <p className={styles.listItemPropValue}>{workShift.salary}</p>
-        </div>
-
-        <div className={styles.wrapper}>
-          <p className={styles.listItemPropName}>Нал. расчет за смену:</p>
-          <p className={styles.listItemPropValue}>{workShift.cash}</p>
-        </div>
-
-        <div className={styles.wrapper}>
-          <p className={styles.listItemPropName}>Нал. в кассе:</p>
-          <p className={styles.listItemPropValue}>{workShift.cash_in_case}</p>
-        </div>
-
-        <div className={styles.wrapper}>
-          <p className={styles.listItemPropName}>Расходы из кассы:</p>
-          <p className={styles.listItemPropValue}>{workShift.costs}</p>
-        </div>
-
-        <div className={styles.wrapper}>
-          <p className={styles.listItemPropName}>Дата:</p>
-          <p className={styles.listItemPropValue}>
-            {String(new Date(workShift.date).toLocaleString().substr(0, 10))}
-          </p>
-        </div>
-
-        <div className={styles.wrapper}>
-          <p className={styles.listItemPropName}>Смена:</p>
-          <p className={styles.listItemPropValue}>
-            {workShift.isNightShift ? "Ночная" : "Дневная"}
-          </p>
-        </div>
+        <div className={styles.wrapper}><span className={styles.listItemPropName}>Сотрудник</span><strong className={styles.listItemPropValue}>{workShift.user.name}</strong></div>
+        <div className={styles.wrapper}><span className={styles.listItemPropName}>Часы</span><strong className={styles.listItemPropValue}>{workShift.workHours}</strong></div>
+        <div className={styles.wrapper}><span className={styles.listItemPropName}>Выручка</span><strong className={styles.listItemPropValue}>{workShift.gain} ₽</strong></div>
+        <div className={styles.wrapper}><span className={styles.listItemPropName}>ЗП за смену</span><strong className={styles.listItemPropValue}>{workShift.salary} ₽</strong></div>
+        <div className={styles.wrapper}><span className={styles.listItemPropName}>Наличные</span><strong className={styles.listItemPropValue}>{workShift.cash} ₽</strong></div>
+        <div className={styles.wrapper}><span className={styles.listItemPropName}>В кассе</span><strong className={styles.listItemPropValue}>{workShift.cash_in_case} ₽</strong></div>
+        <div className={styles.wrapper}><span className={styles.listItemPropName}>Расходы</span><strong className={styles.listItemPropValue}>{workShift.costs} ₽</strong></div>
+        <div className={styles.wrapper}><span className={styles.listItemPropName}>Дата</span><strong className={styles.listItemPropValue}>{date}</strong></div>
+        <div className={styles.wrapper}><span className={styles.listItemPropName}>Смена</span><strong className={styles.listItemPropValue}>{workShift.isNightShift ? "Ночная" : "Дневная"}</strong></div>
       </div>
       {user?.role_id === 1 && (
-        <div
-          className={styles.removeButtonContainer}
-          onClick={(e) => e.preventDefault()}
-        >
-          <Button
-            label="X"
-            type="button"
-            onClick={handleOpenDeleteModal}
-            extraStyles={styles.removeButton}
-          />
-
-          <Button
-            label="•••"
-            type="button"
-            onClick={handleOpenUpdateModal}
-            extraStyles={styles.updateButton}
-          />
+        <div className={styles.removeButtonContainer}>
+          <Button aria-label="Удалить смену" label="×" type="button" onClick={() => dispatch(openConfirmModalShift(workShift.id))} extraStyles={styles.removeButton} />
+          <Button aria-label="Изменить смену" label="⋯" type="button" onClick={() => dispatch(openUpdateWorkShiftModal(workShift))} extraStyles={styles.updateButton} />
         </div>
       )}
     </li>

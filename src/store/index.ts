@@ -11,6 +11,7 @@ import { confirmDeleteEmployeeModalSlice } from "./confirmDeleteEmployeeModalSli
 import { updateWorkShiftModalSlice } from "./updateWorkShiftModalSlice/updateWorkShiftModalSlice.ts";
 import { coefficientsApi } from "./coefficients/coeficients.api.ts";
 import { updateCoefficientsModalSlice } from "./updateCoefficientsModalSlice/updateCoefficientsModalSlice.ts";
+import { telegramApi } from "./telegram/telegram.api.ts";
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +26,7 @@ export const store = configureStore({
     [workShiftsApi.reducerPath]: workShiftsApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [coefficientsApi.reducerPath]: coefficientsApi.reducer,
+    [telegramApi.reducerPath]: telegramApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -32,6 +34,7 @@ export const store = configureStore({
       authApi.middleware,
       workShiftsApi.middleware,
       coefficientsApi.middleware,
+      telegramApi.middleware,
     ),
 });
 

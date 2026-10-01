@@ -49,7 +49,7 @@ export const employeesApi = createApi({
       invalidatesTags: ["Employees"],
     }),
 
-    updateEmployeeParams: build.mutation<any, TEmployeeFormWithId>({
+    updateEmployeeParams: build.mutation<unknown, TEmployeeFormWithId>({
       query: (data) => {
         return {
           url: `/employee/${data.id}`,
@@ -61,7 +61,7 @@ export const employeesApi = createApi({
       invalidatesTags: ["Employees"],
     }),
 
-    deleteEmployee: build.mutation<any, string>({
+    deleteEmployee: build.mutation<unknown, string>({
       query: (id) => {
         return {
           url: `/employee/${id}`,

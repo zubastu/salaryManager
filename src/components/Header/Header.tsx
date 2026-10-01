@@ -11,34 +11,36 @@ const Header = () => {
   const { data } = useGetUserDataQuery();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const handleLogoutClick = () => {
     navigate(routes.login);
     localStorage.clear();
     dispatch(authApi.util.invalidateTags(["Auth"]));
   };
 
-  const handleOpenMobileModal = () => {
-    dispatch(openNavModal());
-  };
-
   return (
     <header className={styles.header}>
-      {data?.role_id === 1 ? <NavigationLinks /> : <div></div>}
-      <div className={styles.desktopContainer}>
-        <p className={styles.greetings}>Привет, {data?.name}</p>
-        <Button
-          type="button"
-          label="Выход"
-          extraStyles={styles.exitButton}
-          onClick={handleLogoutClick}
-        />
-      </div>
-      <div className={styles.mobileContainer}>
-        <p className={styles.greetings}>Привет, {data?.name}</p>
-        <Button
-          className={styles.headerModalButton}
-          onClick={handleOpenMobileModal}
-        ></Button>
+      <div className={styles.inner}>
+        <button className={styles.brand} type="button" onClick={() => navigate(routes.workShifts)}>
+          <span className={styles.brandMark}>S</span>
+          <span className={styles.brandText}>Salary Manager</span>
+        </button>
+
+        {data?.role_id === 1 && <NavigationLinks />}
+
+        <div className={styles.account}>
+          <div className={styles.userBadge} aria-hidden="true">
+            {(data?.name || "U").slice(0, 1).toUpperCase()}
+          </div>
+          <div className={styles.userInfo}>
+            <span className={styles.userName}>{data?.name || "Пользователь"}</span>
+            <span className={styles.userRole}>{data?.role_id === 1 ? "Администратор" : "Сотрудник"}</span>
+          </div>
+          <Button type="button" label="Выйти" extraStyles={styles.exitButton} onClick={handleLogoutClick} />
+          <button className={styles.menuButton} type="button" onClick={() => dispatch(openNavModal())} aria-label="Открыть меню">
+            <span /><span /><span />
+          </button>
+        </div>
       </div>
     </header>
   );

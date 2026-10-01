@@ -3,6 +3,9 @@ import { BASE_URL } from "../../utils/constants.ts";
 import { TWorkShift, TWorkShiftProperties } from "../../types";
 import { getHeaders } from "../employees/employees.api.ts";
 
+type DateRange = { startDate: string; endDate: string };
+type EmployeeDateRange = DateRange & { user_id: string };
+
 export const workShiftsApi = createApi({
   reducerPath: "workShifts/api",
   baseQuery: fetchBaseQuery({
@@ -26,7 +29,7 @@ export const workShiftsApi = createApi({
       providesTags: () => ["WorkShiftsEmployee"],
     }),
 
-    getEmployeeWorkShiftsBetweenDates: build.query<TWorkShift[], any>({
+    getEmployeeWorkShiftsBetweenDates: build.query<TWorkShift[], EmployeeDateRange>({
       query: (data) => ({
         url: `/work_shifts/${data.user_id}/dates`,
         body: { startDate: data.startDate, endDate: data.endDate },
@@ -36,7 +39,7 @@ export const workShiftsApi = createApi({
       providesTags: () => ["WorkShiftsEmployee"],
     }),
 
-    getAllWorkShiftsBetweenDates: build.query<TWorkShift[], any>({
+    getAllWorkShiftsBetweenDates: build.query<TWorkShift[], DateRange>({
       query: (data) => ({
         url: "/work_shifts/dates",
         body: { startDate: data.startDate, endDate: data.endDate },

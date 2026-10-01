@@ -16,10 +16,6 @@ import { useAppDispatch } from "../../hooks/store.ts";
 const CountCase = () => {
   const [getWorkShifts, { data: workShiftsData }] =
     useLazyGetAllWorkShiftsBetweenDatesQuery();
-  const [_, setDates] = useState<{ from: string; to: string }>({
-    from: "",
-    to: "",
-  });
 
   const dispatch = useAppDispatch();
 
@@ -27,14 +23,11 @@ const CountCase = () => {
   const handleSubmit: SubmitHandler<TDateForm> = (data) => {
     if (data.from === "" || data.to === "") {
       dispatch(showNotify("Необходимо выбрать даты"));
+      return;
     }
     getWorkShifts({
       startDate: data.from + dayHours,
       endDate: data.to + nightHours,
-    });
-    setDates({
-      from: new Date(data.from).toLocaleDateString(),
-      to: new Date(data.to).toLocaleDateString(),
     });
   };
 

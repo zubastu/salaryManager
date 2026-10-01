@@ -1,26 +1,32 @@
 @use '../../assets/styles/variables';
-@use '../../assets/styles/mixins';
 
 .input {
-  @include mixins.typography-l;
-  background-color: variables.$color-palette-input-color-auth;
-  color: variables.$color-palette-white;
   width: 100%;
-  height: 40px;
-  padding: 12px 12px 12px 15px;
-}
-.errorMessage {
-  @include mixins.typography-l;
-  color: variables.$color-palette-error;
-  max-width: 260px;
-}
-
-.input::-webkit-calendar-picker-indicator {
-  filter: invert(56%) sepia(65%) saturate(6010%) hue-rotate(214deg) brightness(105%) contrast(97%);
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+  min-height: 44px;
+  padding: 0 13px;
+  border: 1px solid variables.$color-input-border;
+  border-radius: variables.$radius-sm;
+  background: #fff;
+  color: variables.$color-palette-white;
+  font-size: 16px;
+  line-height: 1.2;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .025);
+  transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
   -webkit-appearance: none;
-  margin: 0;
 }
+
+.input::placeholder { color: #94a3b8; opacity: 1; }
+.input:hover:not(:focus) { border-color: #cbd5e1; }
+.input:focus {
+  outline: none;
+  border-color: variables.$color-palette-green;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, .1);
+}
+.input:disabled { background: #f8fafc; color: #94a3b8; }
+
+.error { min-height: 0; }
+.errorMessage { margin: 4px 2px 0; color: variables.$color-palette-error; font-size: 12px; line-height: 1.35; }
+
+.input::-webkit-calendar-picker-indicator { opacity: .55; }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }

@@ -1,14 +1,8 @@
 @use '../../assets/styles/variables';
-@use '../../assets/styles/mixins';
 
-
-.container {
-  max-height: 100dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 10px;
-  min-width: 320px;
-  padding: 10px;
-}
+.container { width: 100%; max-width: 760px; margin: 0 auto; padding: 20px; background: #fff; border: 1px solid variables.$color-palette-border; border-radius: variables.$radius-lg; box-shadow: variables.$shadow-soft; }
+.container::before { content: 'Коэффициенты'; display: block; margin-bottom: 16px; font-size: 20px; font-weight: 780; letter-spacing: -.03em; }
+.list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.li { min-width: 0; padding: 14px; border: 1px solid #edf1f5; border-radius: 12px; background: #f8fafc; color: #64748b; font-size: 12px; line-height: 1.35; }
+.li::first-line { color: #334155; }
+@media (max-width: 650px) { .container { padding: 15px; } .list { grid-template-columns: 1fr; } }

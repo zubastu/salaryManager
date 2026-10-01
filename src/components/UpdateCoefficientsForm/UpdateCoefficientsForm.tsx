@@ -7,7 +7,7 @@ import { SubmitHandler } from "react-hook-form";
 import { TCoefficient } from "../../types";
 import { showNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
 import { useAppDispatch } from "../../hooks/store.ts";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import {
   useGetCoefficientsQuery,
   useUpdateCoefficientsMutation,
@@ -42,22 +42,22 @@ const UpdateCoefficientsForm = () => {
     }
   };
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     dispatch(closeUpdateCoefficientsModal());
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     if (isError) {
       dispatch(showNotify("Ошибка, все поля обязательны."));
     }
-  }, [isError]);
+  }, [dispatch, isError]);
 
   useEffect(() => {
     if (isSuccess) {
       dispatch(showNotify("Коэфф. успешно обновлены."));
       handleClose();
     }
-  }, [isSuccess]);
+  }, [dispatch, handleClose, isSuccess]);
 
   return (
     <FormGroup onSubmit={onSubmit} style={styles.form}>

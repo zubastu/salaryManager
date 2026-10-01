@@ -1,70 +1,10 @@
 @use '../../assets/styles/variables';
-@use '../../assets/styles/mixins';
 
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.tabs {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.forms {
-  display: flex;
-  height: 300px;
-  gap: 40px;
-}
-
-.employeeFormsContainer {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  justify-content: center;
-}
-
-.createFormContainer {
-  gap: 25px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.updateFormContainer {
-  gap: 25px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.deleteEmployee {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
-  min-height: 200px;
-}
-
-.selectedEmployeeName {
-  min-height: 30px;
-}
-
-@media screen and (max-width: 630px) {
-  .container {
-    align-items: center;
-  }
-  .tabs {
-    flex-direction: column;
-    max-width: 320px;
-    gap: 5px;
-  }
-  .forms {
-    flex-direction: column;
-    gap: 10px;
-  }
-}
+.container { width: 100%; max-width: 1050px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+.tabs { display: flex; gap: 6px; padding: 4px; border-radius: 12px; background: #eaf0f6; max-width: 520px; margin: 0 auto; width: 100%; }
+.forms { display: grid; grid-template-columns: minmax(240px, 300px) minmax(0,1fr); gap: 16px; padding: 16px; background: #fff; border: 1px solid variables.$color-palette-border; border-radius: variables.$radius-lg; box-shadow: variables.$shadow-soft; }
+.createFormContainer, .updateFormContainer, .deleteEmployee { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 0; gap: 10px; }
+.heading { font-size: 20px; font-weight: 780; letter-spacing: -.03em; }
+.selectedEmployee { color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+.selectedEmployeeName { font-size: 17px; font-weight: 700; }
+@media (max-width: 760px) { .forms { grid-template-columns: 1fr; padding: 15px; } .createFormContainer, .updateFormContainer, .deleteEmployee { min-height: 0; align-items: stretch; } }

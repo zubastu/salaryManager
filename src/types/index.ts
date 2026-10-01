@@ -2,7 +2,7 @@ export type TWorkShiftProperties = {
   user_id: string;
   cash: number;
   cash_in_case?: number;
-  costs?: number;
+  costs: number;
   gain: number;
   workHours: number;
   salary: number;
@@ -15,6 +15,7 @@ export type TForm = {
   gain: number;
   workHours: number;
   date: string;
+  costs: number;
 };
 
 export type TLogin = {

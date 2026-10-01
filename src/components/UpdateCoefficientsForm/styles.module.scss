@@ -1,40 +1,8 @@
 @use '../../assets/styles/variables';
-@use '../../assets/styles/mixins';
-
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  min-width: 300px;
-  max-width: 320px;
-}
-.heading {
-  width: 100%;
-  text-align: center;
-}
-
-.inputContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.label {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.cancel {
-  color: variables.$color-palette-error!important;
-}
-
-.buttonsContainer {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
-  flex-direction: column;
-  gap: 15px;
-}
+.form { width: min(100%, 390px); display: flex; flex-direction: column; gap: 12px; }
+.heading { width: 100%; font-size: 19px; font-weight: 780; letter-spacing: -.02em; }
+.inputContainer { display: flex; flex-direction: column; gap: 9px; }
+.label { display: flex; flex-direction: column; gap: 5px; color: #64748b; font-size: 12px; font-weight: 650; }
+.cancel { color: variables.$color-palette-error !important; background: #fff5f5 !important; border-color: #fee2e2 !important; box-shadow: none !important; }
+.buttonsContainer { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 420px) { .buttonsContainer { grid-template-columns: 1fr; } }

@@ -7,7 +7,7 @@ import Input from "../Input/Input.tsx";
 import Button from "../Button/Button.tsx";
 import { SubmitHandler } from "react-hook-form";
 import { showNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { resetEmployee } from "../../store/employeeSelectionSlice/employeeSelectionSlice.ts";
 import { useDeleteEmployeeMutation } from "../../store/employees/employees.api.ts";
 
@@ -21,6 +21,10 @@ const ConfirmDeleteEmployeeModal = () => {
     deleteEmployee,
     { isSuccess: isSuccessDelete, isError: isErrorDelete },
   ] = useDeleteEmployeeMutation();
+
+  const handleClose = useCallback(() => {
+    dispatch(closeConfirmModalEmployee());
+  }, [dispatch]);
 
   const handleSubmit: SubmitHandler<{ confirm: string }> = async (data) => {
     if (data.confirm.toLowerCase() === "удалить" && selectedEmployeeId !== "") {
@@ -36,17 +40,13 @@ const ConfirmDeleteEmployeeModal = () => {
       dispatch(showNotify("Сотрудник успешно удален"));
       handleClose();
     }
-  }, [isSuccessDelete]);
+  }, [dispatch, handleClose, isSuccessDelete]);
 
   useEffect(() => {
     if (isErrorDelete) {
       dispatch(showNotify("Ошибка удаления сотрудника"));
     }
-  }, [isErrorDelete]);
-
-  const handleClose = () => {
-    dispatch(closeConfirmModalEmployee());
-  };
+  }, [dispatch, isErrorDelete]);
 
   return (
     <Modal isOpen={isOpen}>

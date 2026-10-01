@@ -16,19 +16,20 @@ export type FormGroupProps<T extends FieldValues> = {
   isReset?: boolean;
 };
 
-const FormGroup = <T extends Record<any, any>>({
+const FormGroup = <T extends FieldValues>({
   onSubmit,
   children,
   style,
   isReset = false,
 }: FormGroupProps<T>) => {
   const formMethods = useForm<T>();
+  const { reset } = formMethods;
 
   useEffect(() => {
     if (isReset) {
-      formMethods.reset();
+      reset();
     }
-  }, [isReset]);
+  }, [isReset, reset]);
 
   return (
     <FormProvider {...formMethods}>

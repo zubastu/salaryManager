@@ -1,58 +1,103 @@
-@import '../../assets/styles/mixins';
-@import '../../assets/styles/variables';
+@use '../../assets/styles/variables';
 
 .header {
-  @include typography-xs;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: $color-palette-border;
-  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
   width: 100%;
+  min-height: 64px;
+  padding: 0 clamp(12px, 2.4vw, 32px);
+  background: rgba(255,255,255,.92);
+  border-bottom: 1px solid variables.$color-palette-border;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
-.greetings {
-  @include typography-l;
 
-}
-.desktopContainer {
+.inner {
+  width: 100%;
+  max-width: 1440px;
+  min-height: 64px;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 200px;
+  gap: 28px;
 }
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: variables.$color-palette-white;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.brandMark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #fff;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(15,23,42,.12);
+}
+
+.brandText { font-size: 15px; letter-spacing: -.02em; white-space: nowrap; }
+
+.account {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.userBadge {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #2563eb;
+  font-weight: 750;
+}
+
+.userInfo { display: flex; flex-direction: column; min-width: 0; }
+.userName { max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; font-weight: 650; }
+.userRole { color: #94a3b8; font-size: 11px; margin-top: 2px; }
 
 .exitButton {
-  color: $color-palette-error;
-  @include typography-l;
-  width: 90px;
-  padding: 5px;
+  width: auto !important;
+  min-width: 72px;
+  min-height: 36px !important;
+  padding: 0 12px !important;
+  background: #fff !important;
+  color: #475569 !important;
+  border-color: variables.$color-palette-border !important;
+  box-shadow: none !important;
 }
-.headerModalButton {
-  background: inherit;
-  border: none;
-  width: 24px;
-  height: 24px;
-  box-sizing: border-box;
-  background-image: url("../../assets/images/headerModalIcon.svg");
+.exitButton:hover { background: #f8fafc !important; color: #0f172a !important; }
+
+.menuButton { display: none; width: 42px; height: 42px; padding: 9px; border: 1px solid variables.$color-palette-border; border-radius: 11px; background: #fff; }
+.menuButton span { display: block; height: 2px; margin: 4px 0; border-radius: 2px; background: #334155; }
+
+@media (max-width: 900px) {
+  .brandText { display: none; }
+  .inner { gap: 18px; }
 }
 
-.mobileContainer {
-  display: none;
-}
-
-@media screen and (max-width: 760px) {
-  .header {
-    padding: 5px;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .desktopContainer {
-    display: none;
-  }
-  .mobileContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
+@media (max-width: 760px) {
+  .header { min-height: 56px; padding: 0 12px; }
+  .inner { min-height: 56px; gap: 10px; }
+  .userInfo, .exitButton { display: none !important; }
+  .menuButton { display: block; }
+  .brandMark { width: 32px; height: 32px; }
 }

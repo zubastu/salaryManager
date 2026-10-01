@@ -16,7 +16,10 @@ import { TWorkShift } from "../../types";
 import useWindowDimensions from "../../hooks/resize.ts";
 import { Tab } from "../../components/Tab/Tab.tsx";
 import { showNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
-import { getCurrentMonthDates } from "../../utils/datesHelper.ts";
+import {
+  getCurrentMonthDates,
+  getPrevMonthSixteenthToEnd,
+} from "../../utils/datesHelper.ts";
 
 export type TDateForm = {
   from: string;
@@ -24,7 +27,8 @@ export type TDateForm = {
 };
 
 const CountSalary = () => {
-  const { first, fifteenth, sixteenth, last } = getCurrentMonthDates();
+  const { first, fifteenth, last } = getCurrentMonthDates();
+  const { sixteenth, last: lastSixteenth } = getPrevMonthSixteenthToEnd();
   const [
     getShifts,
     { data: workShiftsResponse, isSuccess: workShiftsResponseSuccess },
@@ -43,12 +47,12 @@ const CountSalary = () => {
   );
 
   const isEmployeeSelected = Boolean(selectedEmployee.id);
-  const isDatesSelected = Boolean(from !== "" || to !== "");
+  const isDatesSelected = Boolean(from !== "" && to !== "");
   const isMobile = width <= 1120;
 
   useEffect(() => {
     dispatch(resetEmployee());
-  }, []);
+  }, [dispatch]);
 
   const handleSubmit: SubmitHandler<TDateForm> = async () => {
     if (isEmployeeSelected) {
@@ -89,7 +93,7 @@ const CountSalary = () => {
   };
   const setSixteenLast = () => {
     setFrom(sixteenth);
-    setTo(last);
+    setTo(lastSixteenth);
   };
 
   return (
@@ -107,7 +111,7 @@ const CountSalary = () => {
             onClick={() => {
               setTabValue("result");
             }}
-            value="Посмотреть реузльтат"
+            value="Посмотреть результат"
             active={tabValue === "result"}
           />
         </div>

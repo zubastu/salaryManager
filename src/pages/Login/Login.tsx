@@ -21,7 +21,7 @@ const Login = () => {
     login,
     { isError: loginError, isSuccess: loginSuccess, data: loginData },
   ] = useLoginMutation();
-  const { data: _, refetch } = useGetUserDataQuery();
+  const { refetch } = useGetUserDataQuery();
 
   const dispatch = useAppDispatch();
 
@@ -33,14 +33,14 @@ const Login = () => {
     if (loginError) {
       dispatch(showNotify("Ошибка входа"));
     }
-  }, [loginError, loginSuccess, loginData]);
+  }, [dispatch, loginError, loginData]);
 
   useEffect(() => {
     if (loginData && loginData.accessToken) {
       refetch();
       navigate(routes.workShifts);
     }
-  }, [loginSuccess]);
+  }, [loginData, loginSuccess, navigate, refetch]);
 
   const handleSubmit: SubmitHandler<TLogin> = (data) => {
     login(data);

@@ -1,12 +1,12 @@
-import { TWorkShiftProperties } from "../types";
+import { TWorkShift } from "../types";
 
 export const getCountOfSalaryByEmployeeNames = (
-  workShifts: TWorkShiftProperties[],
+  workShifts: TWorkShift[],
 ) => {
   const getEmployeeNames = () => {
     const result: string[] = [];
-    //@ts-ignore
-    workShifts.forEach(({ employeeName }) => {
+    workShifts.forEach(({ user }) => {
+      const employeeName = user.name;
       if (result.find((item) => item === employeeName)) {
         return;
       }
@@ -16,8 +16,7 @@ export const getCountOfSalaryByEmployeeNames = (
     return result;
   };
   const filterByName = (name: string) => {
-    //@ts-ignore
-    return workShifts.filter((item) => item.employeeName === name);
+    return workShifts.filter((item) => item.user.name === name);
   };
 
   const names = getEmployeeNames();

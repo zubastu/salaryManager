@@ -1,134 +1,32 @@
 @use '../../assets/styles/variables';
-@use '../../assets/styles/mixins';
 
 .container {
   display: flex;
-  border-bottom: 1px solid variables.$color-palette-white;
+  align-items: stretch;
+  gap: 8px;
+  padding: 9px 12px;
+  border-bottom: 1px solid #eef2f7;
 }
+.container:last-child { border-bottom: 0; }
+.listItem { flex: 1; min-width: 0; display: grid; grid-template-columns: repeat(9, minmax(65px, 1fr)); gap: 8px; align-items: center; }
+.wrapper { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.listItemPropName { color: #94a3b8; font-size: 10px; font-weight: 700; line-height: 1.25; }
+.listItemPropValue { color: #1e293b; font-size: 13px; font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.removeButtonContainer { display: flex; align-items: center; gap: 6px; }
+.removeButton, .updateButton { width: 36px !important; min-width: 36px !important; height: 36px !important; min-height: 36px !important; padding: 0 !important; border-radius: 10px !important; box-shadow: none !important; background: #f8fafc !important; color: #475569 !important; border: 1px solid variables.$color-palette-border !important; }
+.removeButton { color: #dc2626 !important; background: #fff5f5 !important; border-color: #fee2e2 !important; }
 
-.listItem {
-  color: variables.$color-palette-white;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  min-height: 80px;
-  justify-content: space-between;
+@media (max-width: 1100px) {
+  .listItem { grid-template-columns: repeat(5, minmax(60px, 1fr)); }
 }
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  max-width: 180px;
-  min-width: 70px;
-  width: 100%;
+@media (max-width: 760px) {
+  .container { padding: 13px; }
+  .listItem { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px 14px; }
+  .wrapper { padding: 0; }
+  .listItemPropValue { font-size: 14px; }
+  .removeButtonContainer { align-self: start; flex-direction: column; }
 }
-
-.listItemPropName {
-  @include mixins.typography-x;
-  display: flex;
-  text-align: center;
-  align-items: flex-start;
-  min-height: 25px;
-  max-width: 180px;
-  width: 100%;
-  justify-content: center;
-}
-
-.listItemPropValue {
-  @include mixins.typography-x;
-  color: variables.$color-palette-blue;
-  max-width: 150px;
-  width: 100%;
-  text-align: center;
-  min-width: 70px;
-}
-
-.removeButtonContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 5px;
-  flex: 1 1;
-}
-
-.removeButton {
-  max-width: 30px;
-  max-height: 30px;
-  min-width: 30px;
-  min-height: 30px;
-  color: variables.$color-palette-error!important;
-  border-radius: 50%;
-}
-
-.updateButton {
-  max-width: 30px;
-  max-height: 30px;
-  min-width: 30px;
-  min-height: 30px;
-  border-radius: 50%;
-}
-
-@media screen and (max-width: 1330px) {
-  .listItemPropValue {
-    min-width: 50px;
-  }
-}
-
-@media screen and (max-width: 830px) {
-  .listItem {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-  }
-
-  .listItemPropValue {
-    @include mixins.typography-xs;
-  }
-
-  .listItemPropName {
-    @include mixins.typography-xs;
-  }
-
-  .removeButtonContainer {
-    min-height: 90px;
-    justify-content: space-evenly;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .listItem {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    margin: 0 0 10px 0;
-    padding: 0 0 10px 0;
-  }
-
-  .wrapper {
-    padding: 0;
-  }
-
-  .listItemPropName {
-    min-height: 40px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-
-}
-
-@media screen and (max-width: 332px) {
-  .listItemPropName {
-    min-height: 57px;
-  }
+@media (max-width: 390px) {
+  .listItem { grid-template-columns: 1fr 1fr; }
+  .listItemPropValue { font-size: 13px; }
 }

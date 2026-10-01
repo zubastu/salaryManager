@@ -1,20 +1,28 @@
-/*
-  Fonts variables
-*/
-$font-roboto: 'Roboto', sans-serif;
+$font-roboto: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-/*
-  Colors variables
-*/
-$color-palette-white: #FFFFFF;
-$color-palette-black: #000000;
-$color-palette-gray: #7A7A7A;
-$color-palette-blue: #FFFFFF;
-$color-palette-green: #009A63;
-$color-palette-error: #E32636;
-$color-palette-input-color-task: #2f2f37;
-$color-palette-modal-content-background: #1c1c21;
-$color-palette-input-color-auth: rgba(255, 255, 255, 0.1);
-$color-palette-border: rgba(255, 255, 255, 0.2);
-$color-palette-icon:rgba(255, 255, 255, 0.5);
+$color-palette-white: #0f172a;
+$color-palette-black: #f6f8fb;
+$color-palette-gray: #64748b;
+$color-palette-blue: #0f172a;
+$color-palette-green: #2563eb;
+$color-palette-error: #dc2626;
+$color-palette-input-color-task: #ffffff;
+$color-palette-modal-content-background: #ffffff;
+$color-palette-input-color-auth: #ffffff;
+$color-palette-border: #e5eaf1;
+$color-palette-icon: #64748b;
+$color-on-primary: #ffffff;
+$color-surface-muted: #f8fafc;
+$color-input-border: #dbe2ea;
+$color-palette-accent-soft: #eff6ff;
+$color-success: #16a34a;
+$color-warning: #d97706;
 
+$shadow-soft: 0 1px 2px rgba(15, 23, 42, .03), 0 6px 18px rgba(15, 23, 42, .05);
+$shadow-card: 0 8px 30px rgba(15, 23, 42, .07);
+$shadow-elevated: 0 18px 50px rgba(15, 23, 42, .14);
+
+$radius-sm: 10px;
+$radius-md: 14px;
+$radius-lg: 18px;
+$radius-xl: 24px;

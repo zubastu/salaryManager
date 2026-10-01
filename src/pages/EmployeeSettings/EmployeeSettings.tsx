@@ -61,32 +61,32 @@ const EmployeeSettings = () => {
 
   useEffect(() => {
     dispatch(resetEmployee());
-  }, [tab]);
+  }, [dispatch, tab]);
 
   useEffect(() => {
     if (isSuccessUpdate) {
       dispatch(resetEmployee());
       dispatch(showNotify("Сотрудник успешно обновлен"));
     }
-  }, [isSuccessUpdate]);
+  }, [dispatch, isSuccessUpdate]);
 
   useEffect(() => {
     if (isErrorUpdate) {
       dispatch(showNotify("Ошибка обновления сотрудника"));
     }
-  }, [isErrorUpdate]);
+  }, [dispatch, isErrorUpdate]);
 
   useEffect(() => {
     if (isSuccessCreate) {
       dispatch(showNotify("Сотрудник успешно добавлен"));
     }
-  }, [isSuccessCreate]);
+  }, [dispatch, isSuccessCreate]);
 
   useEffect(() => {
     if (isErrorCreate) {
       dispatch(showNotify("Ошибка добавления сотрудника"));
     }
-  }, [isErrorCreate]);
+  }, [dispatch, isErrorCreate]);
 
   return (
     <section className={styles.container}>

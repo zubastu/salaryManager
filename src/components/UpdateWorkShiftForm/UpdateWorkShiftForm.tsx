@@ -3,7 +3,7 @@ import FormGroup from "../FormGroup/FormGroup.tsx";
 import Input from "../Input/Input.tsx";
 import { validation } from "../../utils/validation.ts";
 import Button from "../Button/Button.tsx";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useUpdateWorkShiftMutation } from "../../store/workShifts/workShifts.api.ts";
 import { useGetUserDataQuery } from "../../store/auth/auth.api.ts";
 import { useAppDispatch, useAppSelector } from "../../hooks/store.ts";
@@ -53,26 +53,26 @@ const UpdateWorkShiftForm = () => {
     }
   };
 
+  const handleCloseModal = useCallback(() => {
+    dispatch(closeUpdateWorkShiftModal());
+  }, [dispatch]);
+
   useEffect(() => {
     if (successUpdateWorkShift) {
       dispatch(showNotify("Смена успешно обновлена!"));
       handleCloseModal();
     }
     dispatch(resetEmployee());
-  }, [successUpdateWorkShift]);
+  }, [dispatch, handleCloseModal, successUpdateWorkShift]);
 
   useEffect(() => {
     if (errorUpdateWorkShift) {
       dispatch(showNotify("Все поля обязательны"));
     }
-  }, [errorUpdateWorkShift]);
+  }, [dispatch, errorUpdateWorkShift]);
 
   const handleChange = () => {
     setIsNightWork((prevState) => !prevState);
-  };
-
-  const handleCloseModal = () => {
-    dispatch(closeUpdateWorkShiftModal());
   };
 
   return (

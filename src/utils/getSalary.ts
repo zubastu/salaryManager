@@ -38,6 +38,7 @@ export const getSalary = (
 
   return {
     ...data,
+    costs: data.costs,
     date: isNightWork ? data.date + nightHours : data.date + dayHours,
     salary,
     isNightShift: isNightWork,

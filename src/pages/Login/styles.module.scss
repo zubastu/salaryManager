@@ -1,27 +1,6 @@
 @use '../../assets/styles/variables';
-@use '../../assets/styles/mixins';
 
-
-.container {
-  max-width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
-.info {
-  width: 100%;
-  text-align: center;
-}
-
-.link {
-  color: variables.$color-palette-blue;
-  opacity: 1;
-  transition: opacity ease .5s;
-
-  &:hover {
-    opacity: .5;
-    transition: opacity ease .5s;
-  }
-}
+.container { width: min(100%, 390px); margin: 8vh auto 0; padding: 28px; background: rgba(255,255,255,.96); border: 1px solid variables.$color-palette-border; border-radius: 22px; box-shadow: variables.$shadow-elevated; }
+.container::before { content: 'Salary Manager'; display: block; margin-bottom: 6px; font-size: 25px; font-weight: 800; letter-spacing: -.04em; }
+.container::after { content: 'Войдите, чтобы продолжить'; display: block; margin-bottom: 22px; color: #94a3b8; font-size: 13px; }
+@media (max-width: 500px) { .container { width: 100%; margin-top: 5vh; padding: 22px 16px; border-radius: 18px; } }

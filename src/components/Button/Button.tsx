@@ -1,27 +1,20 @@
 import { ButtonHTMLAttributes, FC } from "react";
-
 import styles from "./styles.module.scss";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
-  id?: string;
-  disabled?: boolean;
-  onClick?: () => void;
   extraStyles?: string;
 }
 
-const Button: FC<ButtonProps> = (props) => {
-  const { label, disabled, type = "submit", extraStyles, ...rest } = props;
-  return (
-    <button
-      className={`${styles.button} ${extraStyles}`}
-      type={type}
-      disabled={disabled ? disabled : false}
-      {...rest}
-    >
-      {label}
-    </button>
-  );
-};
+const Button: FC<ButtonProps> = ({ label, disabled, type = "submit", extraStyles = "", className = "", children, ...rest }) => (
+  <button
+    className={[styles.button, extraStyles, className].filter(Boolean).join(" ")}
+    type={type}
+    disabled={disabled}
+    {...rest}
+  >
+    {label ?? children}
+  </button>
+);
 
 export default Button;

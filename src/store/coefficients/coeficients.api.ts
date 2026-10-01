@@ -1,27 +1,13 @@
-import {
-  BaseQueryFn,
-  createApi,
-  FetchArgs,
-  fetchBaseQuery,
-} from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { getHeaders } from "../employees/employees.api.ts";
 import { BASE_URL } from "../../utils/constants.ts";
 import { TCoefficient } from "../../types";
 
-type TCustomError = {
-  data: {
-    message: string;
-  };
-  status: number;
-};
-
 export const coefficientsApi = createApi({
   reducerPath: "coefficients/api",
   tagTypes: ["Coefficient"],
-  baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL,
-  }) as BaseQueryFn<string | FetchArgs, unknown, TCustomError, {}>,
+  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (build) => ({
     updateCoefficients: build.mutation<TCoefficient, TCoefficient>({
       query: (data: TCoefficient) => ({

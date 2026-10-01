@@ -5,7 +5,7 @@ import {
   useDeleteWorkShiftMutation,
   workShiftsApi,
 } from "../../store/workShifts/workShifts.api.ts";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { showNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
 import FormGroup from "../FormGroup/FormGroup.tsx";
 import Input from "../Input/Input.tsx";
@@ -22,6 +22,10 @@ const ConfirmDeleteWorkShiftModal = () => {
   const [deleteWorkShift, { isSuccess: deleteSuccess, isError: deleteError }] =
     useDeleteWorkShiftMutation();
 
+  const handleClose = useCallback(() => {
+    dispatch(closeConfirmModalShift());
+  }, [dispatch]);
+
   useEffect(() => {
     if (deleteSuccess) {
       dispatch(showNotify("Смена успешно удалена"));
@@ -31,7 +35,7 @@ const ConfirmDeleteWorkShiftModal = () => {
     if (deleteError) {
       dispatch(showNotify("Ошибка удаления смены"));
     }
-  }, [deleteSuccess, deleteError]);
+  }, [deleteSuccess, deleteError, dispatch, handleClose]);
 
   const handleSubmit: SubmitHandler<{ confirm: string }> = async (data) => {
     if (
@@ -42,10 +46,6 @@ const ConfirmDeleteWorkShiftModal = () => {
     } else {
       dispatch(showNotify("Нужно ввести 'удалить'"));
     }
-  };
-
-  const handleClose = () => {
-    dispatch(closeConfirmModalShift());
   };
 
   return (

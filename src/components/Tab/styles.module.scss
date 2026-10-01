@@ -1,11 +1,16 @@
 @use '../../assets/styles/variables';
-@use '../../assets/styles/mixins';
 
-.tab {
-  color: variables.$color-palette-blue;
-  padding: 0 5px;
+.tab, .tabActive {
+  width: auto !important;
+  min-height: 40px !important;
+  flex: 1;
+  padding: 0 12px !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  background: #f8fafc !important;
+  color: #64748b !important;
+  border: 1px solid variables.$color-palette-border !important;
+  transform: none !important;
+  filter: none !important;
 }
-.tabActive {
-  color: variables.$color-palette-green;
-  border: 1px solid variables.$color-palette-green;
-}
+.tabActive { background: #eff6ff !important; border-color: #bfdbfe !important; color: #2563eb !important; }

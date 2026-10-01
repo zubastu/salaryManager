@@ -2,106 +2,83 @@
 @use 'fonts';
 
 *,
-::after,
-::before {
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-html,
+html {
+  min-height: 100%;
+  background: variables.$color-palette-black;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
 body,
-div[id='root'] {
-  display: flex;
-  flex-direction: column;
-  border: 0;
-  overflow-x: hidden;
-  font-style: normal;
-  scroll-behavior: smooth;
-  font-family: variables.$font-roboto;
+#root {
+  min-height: 100dvh;
 }
 
 body {
-  margin: 0 auto;
-  background-color: variables.$color-palette-black;;
-  padding: 0;
+  overflow-x: hidden;
+  font-family: variables.$font-roboto;
+  background:
+    radial-gradient(circle at 0 0, rgba(37, 99, 235, .055), transparent 32rem),
+    radial-gradient(circle at 100% 0, rgba(14, 165, 233, .035), transparent 28rem),
+    variables.$color-palette-black;
   color: variables.$color-palette-white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#root {
-  width: 100dvw;
-  display: flex;
-  align-items: center;
-  height: 100dvh;
-  position: relative;
-}
-#root::-webkit-scrollbar {
-  display: none;
+::selection {
+  background: rgba(37, 99, 235, .16);
 }
 
-@media (max-width: 1250px) {
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  border: none;
-}
-
-p {
+h1, h2, h3, h4, h5, h6, p {
   margin: 0;
 }
 
-ul {
+ul, ol {
   margin: 0;
   padding: 0;
 }
 
 li {
-  list-style-type: none;
+  list-style: none;
 }
 
 a {
-  display: inline-block;
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
 button {
-  box-shadow: none;
   cursor: pointer;
 }
 
-img {
-  max-width: 100%;
+input,
+select,
+textarea {
+  min-width: 0;
 }
 
-input {
-  border: 1px solid variables.$color-palette-input-color-auth;
-  outline: none;
-}
-
-input:focus {
-  outline: 1px solid variables.$color-palette-blue;;
-  border: none
-}
-
-input:hover {
-  outline: none;
-  border: variables.$color-palette-black;
+input:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, .2);
+  outline-offset: 2px;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
-  transition: background-color 0s 600000s, color 0s 600000s !important;
-}
-
-@media screen and (max-width: 400px) {
-  html,
-  body,
-  div[id='root'] {
-    overflow-x: auto;
-  }
+  -webkit-text-fill-color: variables.$color-palette-white;
+  transition: background-color 99999s ease-in-out 0s;
 }

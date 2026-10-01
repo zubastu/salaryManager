@@ -13,6 +13,7 @@ import { usePostWorkShiftMutation } from "../../store/workShifts/workShifts.api.
 import { resetEmployee } from "../../store/employeeSelectionSlice/employeeSelectionSlice.ts";
 import { useGetUserDataQuery } from "../../store/auth/auth.api.ts";
 import { useGetCoefficientsQuery } from "../../store/coefficients/coeficients.api.ts";
+import { useSendToTelegramMutation } from "../../store/telegram/telegram.api.ts";
 
 const WorkShiftsForm = () => {
   const [isNightWork, setIsNightWork] = useState(false);
@@ -21,6 +22,8 @@ const WorkShiftsForm = () => {
     postWorkShift,
     { isSuccess: successPostWorkShift, isError: errorPostWorkShift },
   ] = usePostWorkShiftMutation();
+
+  const [sendToBot] = useSendToTelegramMutation();
 
   const { data: user } = useGetUserDataQuery();
 
@@ -45,7 +48,22 @@ const WorkShiftsForm = () => {
         employee,
         coefficientsData,
       );
-      await postWorkShift(workShift);
+
+      const botData = {
+        message: `
+        Кеш Кеш Кеш!
+        ${isNightWork ? "Ночная" : "Дневная"} смена сотрудника: ${user.name}
+        Дата: ${String(new Date(data.date).toLocaleString().substr(0, 10))}
+        Выручка за смену: ${data.gain}р.
+        Часов отработано: ${data.workHours}
+        Расходы: ${data.costs}р.
+        Наличный расчет: ${data.cash}р.
+        Заработал: ${workShift.salary}р.
+        `,
+      };
+      const response = await postWorkShift(workShift);
+      if ("error" in response) return;
+      await sendToBot(botData);
     }
   };
 
@@ -54,18 +72,16 @@ const WorkShiftsForm = () => {
       dispatch(resetEmployee());
       dispatch(showNotify("Смена успешно зарегистрирована!"));
     }
-    dispatch(resetEmployee());
-  }, [successPostWorkShift]);
+  }, [dispatch, successPostWorkShift]);
 
   useEffect(() => {
     if (errorPostWorkShift) {
       dispatch(showNotify("Все поля обязательны"));
     }
-  }, [errorPostWorkShift]);
+  }, [dispatch, errorPostWorkShift]);
 
   const handleChange = () => {
     setIsNightWork((prevState) => !prevState);
-    console.log(coefficientsData);
   };
 
   return (

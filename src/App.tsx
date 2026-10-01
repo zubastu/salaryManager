@@ -51,12 +51,6 @@ function App() {
           />
           <Route
             element={
-              <ProtectedRoute element={<CountSalary />} adminOnly={true} />
-            }
-            path={routes.countCase}
-          />
-          <Route
-            element={
               <ProtectedRoute element={<Coefficients />} adminOnly={true} />
             }
             path={routes.coefficients}

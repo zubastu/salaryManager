@@ -1,24 +1,28 @@
 @use '../../assets/styles/variables';
-@use '../../assets/styles/mixins';
 
 .list {
   display: flex;
-  gap: 40px;
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid variables.$color-palette-border;
+  border-radius: 13px;
+  background: #f8fafc;
 }
 
 .link {
-  color: variables.$color-palette-white;
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 9px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+  transition: color .15s ease, background .15s ease;
 }
+.link:hover { color: #0f172a; background: #fff; }
+.linkActive { @extend .link; color: #1d4ed8; background: #fff; box-shadow: 0 1px 3px rgba(15,23,42,.07); }
 
-.linkActive {
-  color: variables.$color-palette-green;
-}
-
-@media screen and (max-width: 760px) {
-  .list {
-    display: none;
-  }
-}
+@media (max-width: 760px) { .list { display: none; } }
+@media (max-width: 1080px) { .link { padding: 0 8px; } }

@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/store.ts";
 import { CSSTransition } from "react-transition-group";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { hideNotify } from "../../store/notifyServiceSlice/notifyServiceSlice.ts";
 
 const NotifyService = () => {
@@ -9,9 +9,9 @@ const NotifyService = () => {
   const nodeRef = useRef(null);
   const dispatch = useAppDispatch();
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     dispatch(hideNotify());
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     if (isOpen) {
@@ -20,7 +20,7 @@ const NotifyService = () => {
       }, 2000);
       return () => clearTimeout(timeout);
     }
-  }, [isOpen]);
+  }, [handleClose, isOpen]);
 
   return (
     <CSSTransition

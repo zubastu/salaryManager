@@ -1,9 +1,4 @@
-import {
-  BaseQueryFn,
-  createApi,
-  FetchArgs,
-  fetchBaseQuery,
-} from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { getHeaders } from "../employees/employees.api.ts";
 import { TLogin } from "../../types";
@@ -13,13 +8,6 @@ const headers: HeadersInit = {
   "Content-Type": "application/json",
   Accept: "application/json: charset=utf-8",
   "Access-Control-Allow-Origin": "*",
-};
-
-type TCustomError = {
-  data: {
-    message: string;
-  };
-  status: number;
 };
 
 type TUserResponse = {
@@ -33,9 +21,7 @@ type TUserResponse = {
 export const authApi = createApi({
   reducerPath: "auth/api",
   tagTypes: ["Auth"],
-  baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL,
-  }) as BaseQueryFn<string | FetchArgs, unknown, TCustomError, {}>,
+  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (build) => ({
     login: build.mutation<TUserResponse, TLogin>({
       query: (data: TLogin) => ({
